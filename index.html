@@ -1,0 +1,3877 @@
+<!doctype html>
+<html lang="en" data-visualize-standalone>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; style-src 'unsafe-inline' blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; img-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; font-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; media-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; worker-src blob:; connect-src blob: data:; frame-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>Contract Review Demo</title>
+<style>:root{color-scheme:light dark;background:light-dark(rgb(255 255 255), rgb(24 24 24))}html,body{margin:0}body{box-sizing:border-box;padding:1rem;background:inherit}iframe{display:block;width:100%;height:calc(100vh - 2rem);margin:0 auto;border:0}</style>
+</head>
+<body>
+<iframe id="codex-visualization" sandbox="allow-scripts" referrerpolicy="no-referrer" title="Contract Review Demo" data-srcdoc="&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot; data-visualize-standalone&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;
+&lt;meta http-equiv=&quot;Content-Security-Policy&quot; content=&quot;default-src &#x27;none&#x27;; script-src &#x27;unsafe-inline&#x27; &#x27;unsafe-eval&#x27; &#x27;wasm-unsafe-eval&#x27; blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; style-src &#x27;unsafe-inline&#x27; blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; img-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; font-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; media-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; worker-src blob:; connect-src blob: data:; frame-src &#x27;none&#x27;; object-src &#x27;none&#x27;; base-uri &#x27;none&#x27;; form-action &#x27;none&#x27;&quot;&gt;
+&lt;title&gt;Contract Review Demo&lt;/title&gt;
+&lt;style&gt;:root {
+  color-scheme: light dark;
+  background-color: var(
+    --background,
+    var(--color-background-primary, light-dark(rgb(255 255 255), rgb(24 24 24)))
+  ) !important;
+
+  /* Agent-facing contract; keep in sync with SKILL.md. */
+  --background: var(
+    --color-background-primary,
+    light-dark(rgb(255 255 255), rgb(24 24 24))
+  );
+  --foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --card: color-mix(in oklab, var(--foreground) 5%, var(--background));
+  --card-foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --popover: var(
+    --color-background-secondary,
+    light-dark(rgb(255 255 255), rgb(45 45 45))
+  );
+  --popover-foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --primary: var(
+    --color-text-info,
+    light-dark(rgb(51 156 255), rgb(131 195 255))
+  );
+  --primary-foreground: var(
+    --color-text-inverse,
+    light-dark(rgb(255 255 255), rgb(13 13 13))
+  );
+  --secondary: var(
+    --color-background-secondary,
+    light-dark(rgb(255 255 255 / 96%), rgb(54 54 54 / 96%))
+  );
+  --secondary-foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --muted: color-mix(in srgb, var(--foreground) 10%, transparent);
+  --muted-foreground: var(
+    --color-text-secondary,
+    light-dark(rgb(26 28 31 / 49.4%), rgb(255 255 255 / 49.8%))
+  );
+  --accent: var(
+    --color-background-info,
+    light-dark(rgb(229 242 255), rgb(13 39 63))
+  );
+  --accent-foreground: var(
+    --color-text-info,
+    light-dark(rgb(51 156 255), rgb(131 195 255))
+  );
+  --destructive: var(
+    --color-text-warning,
+    light-dark(rgb(226 85 7), rgb(255 133 73))
+  );
+  --border: var(
+    --color-border-secondary,
+    light-dark(rgb(26 28 31 / 8%), rgb(255 255 255 / 8.2%))
+  );
+  --input: var(
+    --color-border-primary,
+    light-dark(
+      rgb(26 28 31 / 11.8%),
+      color-mix(in oklab, rgb(0 0 0) 10%, transparent)
+    )
+  );
+  --ring: var(
+    --color-ring-primary,
+    light-dark(rgb(51 156 255), rgb(131 195 255 / 76%))
+  );
+  --font-size-base: var(--font-text-md-size, 14px);
+  --blue: light-dark(rgb(51 156 255), rgb(51 156 255));
+  --orange: light-dark(rgb(226 85 7), rgb(251 106 34));
+  --green: light-dark(rgb(0 162 64), rgb(64 201 119));
+  --red: light-dark(rgb(224 46 42), rgb(255 103 100));
+  --purple: light-dark(rgb(146 79 247), rgb(173 123 249));
+  --yellow: light-dark(rgb(255 195 0), rgb(255 210 64));
+  --viz-series-1: var(--primary);
+  --viz-series-2: light-dark(rgb(243 136 59), rgb(245 154 86));
+  --viz-series-3: light-dark(rgb(93 201 119), rgb(116 213 139));
+  --viz-series-4: light-dark(rgb(235 119 177), rgb(240 143 192));
+  --viz-series-5: light-dark(rgb(155 121 236), rgb(170 145 239));
+  --viz-series-6: light-dark(rgb(58 185 177), rgb(90 203 194));
+
+  /* Internal implementation variables; not part of the agent contract. */
+  --font-sans: -apple-system, system-ui, &quot;Segoe UI&quot;, sans-serif;
+  --font-mono:
+    ui-monospace, SFMono-Regular, &quot;SF Mono&quot;, Menlo, Consolas, &quot;Liberation Mono&quot;,
+    monospace;
+  --font-size-normal: max(11px, var(--font-size-base));
+  --font-size-tooltip: calc(var(--font-size-base) - 1px);
+  --font-size-small: max(11px, calc(var(--font-size-base) - 2px));
+  --font-size-h1: calc(var(--font-size-normal) * 1.7142857143);
+  --font-size-h2: calc(var(--font-size-normal) * 1.4285714286);
+  --font-size-h3: calc(var(--font-size-normal) * 1.2857142857);
+  --font-weight-normal: 430;
+  --font-weight-medium: 500;
+  --icon-size: 16px;
+  --line-height-normal: calc(var(--font-size-normal) * 1.5);
+  --line-height-tooltip: calc(var(--font-size-tooltip) * 1.4285714286);
+  --line-height-small: calc(var(--font-size-small) + 4px);
+  --corner-shape: round;
+  --radius: var(--border-radius-lg, 10px);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-2xl: calc(var(--radius) * 1.6);
+  --radius-full: 9999px;
+  --shadow-sm: 0 1px 2px -1px rgb(0 0 0 / 8%);
+  --checkmark-image: url(&quot;data:image/svg+xml,%3Csvg xmlns=&#x27;http://www.w3.org/2000/svg&#x27; viewBox=&#x27;0 0 17 17&#x27;%3E%3Cpath d=&#x27;M12.8961 3.64101C13.1297 3.41418 13.4984 3.37523 13.7779 3.56581C14.0571 3.75635 14.1554 4.11331 14.0299 4.41347L13.9615 4.53847L7.71151 13.7045C7.59411 13.8767 7.4063 13.9877 7.19881 14.0072C6.99136 14.0267 6.78564 13.9533 6.63826 13.806L2.88826 10.056L2.79842 9.9457C2.6192 9.67407 2.64927 9.30496 2.88826 9.06581C3.12738 8.82669 3.49647 8.79676 3.76815 8.97597L3.8785 9.06581L7.03084 12.2182L12.8053 3.74941L12.8961 3.64101Z&#x27;/%3E%3C/svg%3E&quot;);
+
+  /* Legacy aliases; not part of the current agent contract. */
+  --viz-bg: transparent;
+  --viz-panel: var(--card);
+  --viz-border: var(--border);
+  --viz-text: var(--foreground);
+  --viz-muted: var(--muted-foreground);
+  --viz-accent: var(--primary);
+  --viz-accent-text: var(--primary-foreground);
+  --viz-accent-bg: var(--accent);
+  --viz-font-size: var(--font-size-base);
+  --viz-warning: var(--destructive);
+}
+
+:root[data-theme=&quot;light&quot;] {
+  color-scheme: light;
+}
+
+:root[data-theme=&quot;dark&quot;] {
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html &gt; body {
+  /* Preserve MCP aliases for older inline renderers without creating :root cycles. */
+  --color-background-primary: var(
+    --background,
+    light-dark(rgb(255 255 255), rgb(24 24 24))
+  );
+  --color-text-primary: var(
+    --foreground,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --color-border-secondary: var(
+    --border,
+    light-dark(rgb(26 28 31 / 8%), rgb(255 255 255 / 8.2%))
+  );
+
+  margin: 0;
+  padding: var(--visualize-paint-gutter, 0px);
+  color: var(--foreground);
+  background: transparent !important;
+  font-family: var(--font-sans) !important;
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-normal);
+}
+
+.cursor-interaction {
+  cursor: var(--cursor-interaction, pointer);
+}
+
+a {
+  color: color-mix(in srgb, var(--viz-accent) 80%, var(--viz-text) 20%);
+  cursor: var(--cursor-interaction, pointer);
+  font-weight: var(--font-weight-medium, 500);
+  text-decoration: none;
+  text-underline-offset: 2px;
+}
+
+a:is(:hover, :focus-visible) {
+  text-decoration-line: underline;
+  text-decoration-style: dashed;
+  text-decoration-thickness: 0.5px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin-block: 0;
+}
+
+h1 {
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+h2 {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+h3,
+h4,
+h5,
+h6 {
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.3;
+}
+
+b,
+strong,
+th {
+  font-weight: var(--font-weight-medium);
+}
+
+code:not(pre code) {
+  display: inline;
+  padding: 1px 6px;
+  border-radius: var(--radius-sm);
+  corner-shape: var(--corner-shape);
+  background: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  overflow-wrap: anywhere;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  word-break: break-word;
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  color: var(--foreground);
+  font: inherit;
+  text-align: start;
+}
+
+.table :is(th, td) {
+  padding-block: 10px;
+  padding-inline: 0 24px;
+  overflow-wrap: anywhere;
+  border-bottom: 1px solid var(--border);
+  text-align: start;
+  vertical-align: top;
+}
+
+.table-responsive &gt; .table :is(th, td) {
+  overflow-wrap: break-word;
+}
+
+.table :is(th, td):last-child {
+  padding-inline-end: 0;
+}
+
+.table :is(caption, thead th) {
+  font-weight: 600;
+}
+
+.table thead th {
+  padding-block: 8px;
+  border-bottom-color: color-mix(in srgb, var(--foreground) 16%, transparent);
+}
+
+.table tbody tr:last-child :is(th, td) {
+  border-bottom: 0;
+}
+
+.table.table-sm :is(th, td) {
+  padding-block: 6px;
+}
+
+.table.table-sm :is(th, td):not(:last-child) {
+  padding-inline-end: 16px;
+}
+
+.table :is(.text-end, [align=&quot;right&quot;]) {
+  text-align: end;
+  font-variant-numeric: tabular-nums;
+}
+
+.table :is(.text-center, [align=&quot;center&quot;]) {
+  text-align: center;
+}
+
+.table .text-nowrap {
+  white-space: nowrap;
+}
+
+#widget {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  padding: 0;
+  background: transparent !important;
+}
+
+.card {
+  min-width: 0;
+  padding: 12px;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  border-radius: var(--radius-2xl);
+  corner-shape: var(--corner-shape);
+  color: var(--card-foreground);
+  background: var(--card);
+}
+
+.widget {
+  min-width: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: var(--radius-lg);
+  corner-shape: var(--corner-shape);
+  box-shadow: 0 0 0 0.5px var(--border-strong, var(--border));
+  color: var(--foreground);
+  background: var(--background);
+}
+
+#widget &gt; :not(.card, .widget, .progress) {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.tooltip {
+  position: fixed;
+  z-index: 50;
+  top: 0;
+  left: 0;
+  width: max-content;
+  max-width: min(
+    20rem,
+    var(--tooltip-available-width, calc(100vw - 10px)),
+    calc(100vw - 10px)
+  );
+  max-height: min(
+    var(--tooltip-available-height, calc(100vh - 10px)),
+    calc(100vh - 10px)
+  );
+  padding: 4px 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  corner-shape: var(--corner-shape);
+  color: var(--popover-foreground);
+  background: var(--popover);
+  box-shadow: none;
+  font-size: var(--font-size-tooltip);
+  line-height: var(--line-height-tooltip);
+  overflow-wrap: break-word;
+  white-space: normal;
+  pointer-events: none;
+  user-select: none;
+}
+
+.viz-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(max(180px, 24%), 1fr));
+  gap: 10px;
+}
+
+.viz-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.viz-stat-value {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+.viz-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+hr {
+  width: 100%;
+  height: 1px;
+  margin-block: 6px;
+  border: 0;
+  background: var(--border);
+}
+
+.nav {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 4px;
+}
+
+.progress {
+  display: flex;
+  height: 8px;
+  margin-block: calc((var(--line-height-normal, 1.5em) - 8px) / 2);
+  overflow: hidden;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: var(--muted);
+}
+
+.progress-bar:only-child {
+  border-radius: var(--radius-full);
+}
+
+.progress-bar {
+  height: 100%;
+  flex-shrink: 0;
+  border: 0;
+  background: var(--viz-series-1);
+}
+
+.viz-badge {
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+  color: var(--accent-foreground);
+  background: var(--accent);
+  font-weight: var(--font-weight-medium);
+}
+
+small,
+.text-small,
+.viz-badge {
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+}
+
+.text-muted {
+  color: var(--muted-foreground);
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.viz-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.viz-controls &gt; .form-label {
+  display: grid;
+  min-width: min(100%, 260px);
+  flex: 1 1 280px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 2px 12px;
+  margin-bottom: 0;
+}
+
+.viz-controls &gt; .form-label &gt; :is(.form-control, .form-range, .form-select) {
+  grid-column: 1 / -1;
+}
+
+.btn,
+.nav-link,
+.form-check-input,
+.form-control,
+.form-range,
+.form-select {
+  font: inherit;
+}
+
+.btn,
+.nav-link {
+  appearance: button;
+  display: inline-flex;
+  inline-size: fit-content;
+  max-inline-size: 100%;
+  min-height: 28px;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin: 0;
+  padding: 0 8px;
+  -webkit-app-region: no-drag;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  corner-shape: var(--corner-shape);
+  color: var(--secondary-foreground);
+  background: var(--secondary);
+  cursor: var(--cursor-interaction, pointer);
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+.btn:is(.btn-block, .viz-tile) {
+  inline-size: 100%;
+}
+
+.btn.viz-tile {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+a.btn {
+  cursor: var(--cursor-interaction, pointer);
+  text-decoration: none;
+}
+
+.btn:not(:disabled):hover,
+.nav-link:not(:disabled):not([aria-disabled=&quot;true&quot;]):hover {
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.btn-primary {
+  border-color: transparent;
+  color: var(--primary-foreground);
+  background: var(--foreground);
+  background-clip: padding-box;
+}
+
+.btn-primary .text-muted {
+  color: color-mix(in srgb, var(--primary-foreground) 50%, transparent);
+}
+
+.btn-primary:not(:disabled):hover {
+  background: color-mix(in srgb, var(--foreground) 80%, transparent);
+  background-clip: padding-box;
+}
+
+.btn-ghost {
+  border-color: transparent;
+  color: var(--muted-foreground);
+  background: transparent;
+}
+
+.btn-ghost:not(:disabled):hover {
+  color: var(--foreground);
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.nav-pills .nav-link {
+  min-width: 0;
+  border-color: transparent;
+  color: var(--muted-foreground);
+  background: transparent;
+}
+
+.nav-justified .nav-link {
+  flex: 1 1 0;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+.nav-pills .nav-link.active {
+  color: var(--foreground);
+  background: var(--muted);
+}
+
+/* Shared preview chrome; product styles stay inside each variant. */
+.viz-dotted-background {
+  background-image: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--foreground) 14%, transparent) 0.8px,
+    transparent 0.8px
+  );
+  background-position: center;
+  background-size: 16px 16px;
+}
+
+.viz-carousel {
+  position: relative;
+  min-width: 0;
+}
+
+.viz-carousel:has(&gt; .viz-carousel-controls) {
+  min-height: calc(60px + var(--viz-carousel-picker-height, 0px));
+  padding-bottom: 60px;
+}
+
+.viz-carousel &gt; [data-variant][hidden] {
+  display: none !important;
+}
+
+.viz-carousel &gt; [data-variant] {
+  isolation: isolate;
+}
+
+.viz-carousel-controls {
+  --viz-carousel-hover: light-dark(
+    color-mix(in srgb, var(--foreground) 5.4%, transparent),
+    color-mix(in srgb, var(--foreground) 7.8%, transparent)
+  );
+  position: absolute;
+  z-index: 2;
+  bottom: 8px;
+  left: 50%;
+  display: flex;
+  width: max-content;
+  /* Leave room for the host&#x27;s design-controls launcher at the trailing edge. */
+  max-width: calc(100% - 96px);
+  align-items: center;
+  gap: 0;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  color: var(--foreground);
+  background: var(--background);
+  font-family: var(--font-sans);
+  /* Match the settings dropdown chrome independently of the content font size. */
+  font-size: 13px;
+  font-weight: var(--font-weight-normal);
+  line-height: 18px;
+  transform: translateX(-50%);
+  user-select: none;
+}
+
+/* Keep authored mockup button styles out of the shared carousel chrome. */
+.viz-carousel-controls button,
+.viz-carousel-picker &gt; summary {
+  display: flex !important;
+  height: auto !important;
+  min-height: 30px;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 4px;
+  padding: 0 6px !important;
+  -webkit-app-region: no-drag;
+  border: 0 !important;
+  border-radius: 14px !important;
+  color: inherit !important;
+  background: transparent !important;
+  font: inherit !important;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.viz-carousel-controls &gt; button,
+.viz-carousel-picker &gt; summary {
+  position: relative;
+  isolation: isolate;
+}
+
+.viz-carousel-controls &gt; button {
+  --icon-size: 16px;
+  width: 30px !important;
+  padding: 0 !important;
+}
+
+.viz-carousel-picker &gt; summary {
+  padding-inline: 12px !important;
+}
+
+.viz-carousel-controls .viz-carousel-caret {
+  width: 14px;
+  height: 14px;
+  flex: none;
+  margin: 0;
+  color: inherit;
+  transform: rotate(180deg);
+}
+
+.viz-carousel-controls &gt; button &gt; svg,
+.viz-carousel-controls .viz-carousel-caret,
+.viz-carousel-count {
+  opacity: 0.5;
+}
+
+.viz-carousel-controls &gt; button::before,
+.viz-carousel-picker &gt; summary::before {
+  position: absolute;
+  z-index: -1;
+  inset: 3px;
+  border-radius: 12px;
+  content: &quot;&quot;;
+  pointer-events: none;
+}
+
+.viz-carousel-controls &gt; button:hover::before,
+.viz-carousel-picker &gt; summary:hover::before {
+  background: var(--viz-carousel-hover);
+}
+
+.viz-carousel-controls &gt; button,
+.viz-carousel-controls [data-lucide],
+.viz-carousel-controls .lucide {
+  flex-shrink: 0;
+}
+
+.viz-carousel-picker {
+  min-width: 0;
+}
+
+.viz-carousel-picker &gt; summary {
+  min-width: 0;
+  list-style: none;
+}
+
+.viz-carousel-picker &gt; summary::-webkit-details-marker {
+  display: none;
+}
+
+.viz-carousel-count {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.viz-carousel-name {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.viz-carousel-options {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 4px);
+  left: 0;
+  display: flex;
+  max-height: 240px;
+  flex-direction: column;
+  gap: 2px;
+  overflow: auto;
+  padding: 4px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--background);
+  box-shadow: 0 4px 12px light-dark(rgb(0 0 0 / 6%), rgb(0 0 0 / 25%));
+}
+
+.viz-carousel-options &gt; button {
+  border-radius: max(0px, calc(var(--radius-lg) - 5px)) !important;
+  width: 100% !important;
+  min-height: 28px;
+  justify-content: flex-start !important;
+  padding: 4px 8px !important;
+  font-size: var(--font-size-small) !important;
+  text-align: start;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.viz-carousel-options &gt; [aria-current=&quot;true&quot;],
+.viz-carousel-options &gt; button:hover {
+  background: var(--viz-carousel-hover) !important;
+}
+
+.btn:disabled,
+.nav-link:disabled,
+.nav-link[aria-disabled=&quot;true&quot;] {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+[data-lucide] {
+  stroke-width: 1.6;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--foreground);
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  min-height: 28px;
+  padding: 0 8px;
+  outline: none;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  corner-shape: var(--corner-shape);
+  color: var(--foreground);
+  background: var(--secondary);
+}
+
+.form-control::placeholder {
+  color: var(--muted-foreground);
+}
+
+.form-control[type=&quot;file&quot;] {
+  padding: 0;
+  overflow: hidden;
+  cursor: var(--cursor-interaction, pointer);
+}
+
+.form-control[type=&quot;file&quot;]::file-selector-button {
+  min-height: 26px;
+  margin-right: 8px;
+  padding: 0 8px;
+  border: 0;
+  border-right: 1px solid var(--input);
+  color: var(--secondary-foreground);
+  background: var(--secondary);
+  cursor: inherit;
+  font: inherit;
+}
+
+.form-control[type=&quot;file&quot;]:not(:disabled):hover::file-selector-button {
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.form-control-color[type=&quot;color&quot;] {
+  width: 40px;
+  height: 28px;
+  padding: 3px;
+  cursor: var(--cursor-interaction, pointer);
+}
+
+.form-control-color[type=&quot;color&quot;]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.form-control-color[type=&quot;color&quot;]::-webkit-color-swatch {
+  border: 0;
+  border-radius: calc(var(--radius-lg) - 4px);
+  corner-shape: var(--corner-shape);
+}
+
+textarea.form-control {
+  height: auto;
+  min-height: 72px;
+  padding: 8px 10px;
+  resize: vertical;
+}
+
+.form-control:focus-visible {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-control:disabled,
+.form-select:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.form-select {
+  appearance: none;
+  display: block;
+  width: 100%;
+  min-height: 28px;
+  margin: 0;
+  padding: 0 32px 0 8px;
+  outline: none;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  corner-shape: var(--corner-shape);
+  color: var(--foreground);
+  background-color: var(--secondary);
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--muted-foreground) 50%),
+    linear-gradient(135deg, var(--muted-foreground) 50%, transparent 50%);
+  background-position:
+    calc(100% - 14px) 50%,
+    calc(100% - 10px) 50%;
+  background-repeat: no-repeat;
+  background-size: 4px 4px;
+  cursor: var(--cursor-interaction, default);
+}
+
+.form-select:not(:disabled):hover {
+  background-color: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.form-select:focus-visible {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-check {
+  display: flex;
+  min-height: 20px;
+  align-items: center;
+  gap: 6px;
+}
+
+.form-check-input {
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  flex: 0 0 auto;
+  margin: 0;
+  border: 1px solid var(--input);
+  color: var(--primary-foreground);
+  background-color: transparent;
+  cursor: var(--cursor-interaction, default);
+  transition:
+    background-color 150ms,
+    border-color 150ms,
+    box-shadow 150ms;
+}
+
+.form-check:not(.form-switch) .form-check-input[type=&quot;checkbox&quot;] {
+  border-color: var(--input);
+  border-radius: var(--radius-sm);
+  corner-shape: var(--corner-shape);
+  background-color: var(--secondary);
+  box-shadow: var(--shadow-sm);
+}
+
+.form-check:not(.form-switch)
+  .form-check-input:not(:disabled):not(:checked):hover {
+  background-color: var(--card);
+}
+
+.form-check:not(.form-switch) .form-check-input[type=&quot;checkbox&quot;]:checked {
+  border-color: var(--primary);
+  background-color: var(--primary);
+}
+
+.form-check:not(.form-switch)
+  .form-check-input[type=&quot;checkbox&quot;]:checked::before {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--primary-foreground);
+  content: &quot;&quot;;
+  mask: var(--checkmark-image) center / 12px 12px no-repeat;
+}
+
+.form-check-input[type=&quot;radio&quot;] {
+  width: 14px;
+  height: 14px;
+  border-radius: var(--radius-full);
+}
+
+.form-check-input[type=&quot;radio&quot;]:checked {
+  border: 2px solid var(--primary);
+  background:
+    radial-gradient(circle, var(--primary-foreground) 0 2.5px, transparent 3px),
+    var(--primary);
+}
+
+.form-check:not(.form-switch) .form-check-input:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+.form-check:not(.form-switch) .form-check-input:disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.form-check:not(.form-switch) .form-check-input:disabled + .form-check-label {
+  cursor: not-allowed;
+}
+
+.form-switch .form-check-input:disabled,
+.form-switch .form-check-input:disabled + .form-check-label {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.form-check-label {
+  color: var(--foreground);
+  cursor: var(--cursor-interaction, default);
+}
+
+.form-switch .form-check-input {
+  position: relative;
+  width: 32px;
+  height: 20px;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: var(--muted);
+  box-shadow: none;
+  transition: background-color 200ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.form-switch .form-check-input::before {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  box-sizing: border-box;
+  border: 1px solid light-dark(var(--primary-foreground), var(--foreground));
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+  box-shadow: var(--shadow-sm);
+  content: &quot;&quot;;
+  transform: translate(2px, -50%);
+  transition: transform 200ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.form-switch .form-check-input:checked {
+  background: var(--primary);
+}
+
+.form-switch .form-check-input:checked::before {
+  transform: translate(14px, -50%);
+}
+
+.form-switch .form-check-input:focus-visible {
+  box-shadow: 0 0 0 2px var(--ring);
+}
+
+.form-range {
+  appearance: none;
+  display: block;
+  width: 100%;
+  height: 28px;
+  flex: 1;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: 0;
+  accent-color: var(--primary);
+  background: linear-gradient(
+      color-mix(in srgb, var(--foreground) 7%, transparent),
+      color-mix(in srgb, var(--foreground) 7%, transparent)
+    )
+    center / 100% 2px no-repeat;
+}
+
+.form-range::-webkit-slider-runnable-track {
+  height: 28px;
+  background: transparent;
+}
+
+.form-range::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  margin-top: 4px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+}
+
+.form-range:focus-visible::-webkit-slider-thumb {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-range::-moz-range-track {
+  height: 28px;
+  background: transparent;
+}
+
+.form-range::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+}
+
+.form-range:focus-visible::-moz-range-thumb {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-range:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.btn:not(.btn-primary, .viz-tile):is(
+  [aria-pressed=&quot;true&quot;],
+  [aria-selected=&quot;true&quot;],
+  .is-selected
+) {
+  border-color: var(--primary);
+  color: var(--primary-foreground);
+  background: var(--primary);
+}
+
+.btn.viz-tile:is([aria-pressed=&quot;true&quot;], [aria-selected=&quot;true&quot;], .is-selected) {
+  border-color: var(--primary);
+  box-shadow: inset 0 0 0 1px var(--primary);
+}
+
+.btn:focus-visible,
+.nav-link:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+.viz-carousel-controls :is(button, summary):focus-visible {
+  outline: 2px solid var(--ring) !important;
+  outline-offset: 2px !important;
+}
+
+@media (pointer: coarse) {
+  .viz-carousel:has(&gt; .viz-carousel-controls) {
+    min-height: calc(76px + var(--viz-carousel-picker-height, 0px));
+    padding-bottom: 76px;
+  }
+
+  .btn,
+  .nav-link,
+  .viz-carousel-controls button,
+  .viz-carousel-picker &gt; summary,
+  .form-control,
+  .form-select {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  /* Keep small-screen WebKit from zooming when a text field receives focus. */
+  .form-control,
+  .form-select {
+    font-size: max(16px, var(--font-size-normal));
+  }
+
+  .form-control[type=&quot;file&quot;]::file-selector-button {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .form-control-color[type=&quot;color&quot;] {
+    width: 44px;
+    height: 44px;
+  }
+
+  .form-control:is(
+    [type=&quot;date&quot;],
+    [type=&quot;datetime-local&quot;],
+    [type=&quot;month&quot;],
+    [type=&quot;time&quot;],
+    [type=&quot;week&quot;]
+  ) {
+    min-width: 0;
+    max-width: 100%;
+    padding-block: 8px;
+  }
+
+  .form-check {
+    min-height: 44px;
+    padding-inline: 15px;
+  }
+
+  .form-check-input {
+    position: relative;
+  }
+
+  .form-check-input::after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 44px;
+    height: 44px;
+    content: &quot;&quot;;
+    transform: translate(-50%, -50%);
+  }
+
+  .form-check-label {
+    display: inline-flex;
+    min-width: 44px;
+    min-height: 44px;
+    align-items: center;
+  }
+
+  .form-range {
+    height: 44px;
+    touch-action: pan-y;
+  }
+
+  .form-range::-webkit-slider-runnable-track {
+    height: 44px;
+  }
+
+  .form-range::-moz-range-track {
+    height: 44px;
+  }
+
+  .form-range::-webkit-slider-thumb {
+    margin-top: 12px;
+  }
+}
+
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+#widget &gt; svg {
+  width: 100%;
+}
+
+/* Model-authored chart rules can otherwise stretch icons after these styles load. */
+svg.lucide {
+  display: block;
+  width: var(--icon-size) !important;
+  height: var(--icon-size) !important;
+  flex: none;
+  margin: 0 !important;
+  stroke-width: 1.6;
+}
+
+.text-warning,
+.text-destructive {
+  color: var(--destructive);
+}
+
+html&gt;body{padding:0}&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;script type=&quot;application/json&quot; id=&quot;codex-visualization-widget-state&quot;&gt;__CODEX_VISUALIZATION_WIDGET_STATE__&lt;/script&gt;
+&lt;script&gt;(() =&gt; {
+  const root = document.documentElement;
+  const mediaQuery = globalThis.matchMedia(&quot;(prefers-color-scheme: dark)&quot;);
+  const apply = Reflect.apply;
+  const isArray = Array.isArray;
+  const hasOwn = Object.hasOwn;
+  const parentWindow = globalThis.parent;
+  const stringify = JSON.stringify;
+  const parse = JSON.parse;
+  const encode = TextEncoder.prototype.encode.bind(new TextEncoder());
+  const initialStateElement = document.getElementById(
+    &quot;codex-visualization-widget-state&quot;,
+  );
+  const initialGlobals = parse(initialStateElement?.textContent ?? &quot;{}&quot;);
+  initialStateElement?.remove();
+  /** @type {Record&lt;string, unknown&gt; | null} */
+  let state = initialGlobals.widgetState ?? null;
+  const statePersistence = initialGlobals.statePersistence ?? &quot;none&quot;;
+  let nextStateRequestId = 0;
+  /** @type {Map&lt;number, { resolve: () =&gt; void; reject: (error: Error) =&gt; void; timeout: ReturnType&lt;typeof globalThis.setTimeout&gt;; serializedState: string }&gt;} */
+  const pendingStateWrites = new Map();
+  const persistenceError = () =&gt;
+    Object.assign(
+      new Error(&quot;The host could not persist the widget state update&quot;),
+      {
+        code: -32000,
+        data: { code: &quot;widget_state_persistence_failed&quot;, retryable: false },
+      },
+    );
+  /**
+   * @param {object} prototype
+   * @param {string} property
+   */
+  const getPrototypeGetter = (prototype, property) =&gt; {
+    // oxlint-disable-next-line typescript/unbound-method -- invoked through captured Reflect.apply
+    const getter = Object.getOwnPropertyDescriptor(prototype, property)?.get;
+    if (getter == null) {
+      throw new Error(`Missing ${property} getter`);
+    }
+    return getter;
+  };
+  const getMessageData = getPrototypeGetter(MessageEvent.prototype, &quot;data&quot;);
+  const getMessagePorts = getPrototypeGetter(MessageEvent.prototype, &quot;ports&quot;);
+  const getMessageSource = getPrototypeGetter(MessageEvent.prototype, &quot;source&quot;);
+  // oxlint-disable-next-line typescript/unbound-method -- captured before the untrusted fragment runs
+  const addHostMessageListener = MessagePort.prototype.addEventListener;
+  // oxlint-disable-next-line typescript/unbound-method -- captured before the untrusted fragment runs
+  const postHostMessage = MessagePort.prototype.postMessage;
+  // oxlint-disable-next-line typescript/unbound-method -- captured before the untrusted fragment runs
+  const startHostPort = MessagePort.prototype.start;
+  // oxlint-disable-next-line typescript/unbound-method -- captured before the untrusted fragment runs
+  const stopMessagePropagation = Event.prototype.stopImmediatePropagation;
+  /** @type {MessagePort | null} */
+  let hostPort = null;
+  const postToHost = (type, payload) =&gt; {
+    if (hostPort != null) {
+      apply(postHostMessage, hostPort, [{ type, ...payload }]);
+    }
+  };
+  const openExternal = ({ href }) =&gt; {
+    if (globalThis.navigator.userActivation?.isActive === true) {
+      postToHost(&quot;open-external&quot;, { href });
+    }
+  };
+  const sendFollowUpMessage = ({ context, prompt, title }) =&gt; {
+    if (globalThis.navigator.userActivation?.isActive === true) {
+      postToHost(&quot;follow-up&quot;, { context, prompt, title });
+    }
+    return Promise.resolve();
+  };
+  /**
+   * @param {Record&lt;string, unknown&gt; | ((previous: Record&lt;string, unknown&gt; | null) =&gt; Record&lt;string, unknown&gt;)} next
+   * @returns {Promise&lt;void&gt;}
+   */
+  const setWidgetState = async (next) =&gt; {
+    const nextState = typeof next === &quot;function&quot; ? next(state) : next;
+    if (
+      nextState == null ||
+      typeof nextState !== &quot;object&quot; ||
+      isArray(nextState)
+    ) {
+      throw new TypeError(&quot;Widget state must be a JSON object&quot;);
+    }
+    const inputState = stringify(
+      nextState,
+      (_key, /** @type {unknown} */ value) =&gt; {
+        if (
+          typeof value === &quot;undefined&quot; ||
+          typeof value === &quot;function&quot; ||
+          typeof value === &quot;symbol&quot; ||
+          (typeof value === &quot;number&quot; &amp;&amp; !Number.isFinite(value))
+        ) {
+          throw new TypeError(&quot;Widget state must be a JSON object&quot;);
+        }
+        return value;
+      },
+    );
+    const parsedState = parse(inputState);
+    if (
+      parsedState == null ||
+      typeof parsedState !== &quot;object&quot; ||
+      isArray(parsedState)
+    ) {
+      throw new TypeError(&quot;Widget state must be a JSON object&quot;);
+    }
+    const storedState = {
+      modelContent: null,
+      privateContent: null,
+      ...parsedState,
+    };
+    const serializedState = stringify(storedState);
+    if (encode(serializedState).length &gt; 16 * 1024) {
+      throw new TypeError(
+        &quot;Widget state must be a JSON object of at most 16 KiB&quot;,
+      );
+    }
+    if (
+      hasOwn(storedState, &quot;imageIds&quot;) &amp;&amp;
+      (!isArray(storedState.imageIds) ||
+        storedState.imageIds.some(
+          (/** @type {unknown} */ id) =&gt; typeof id !== &quot;string&quot;,
+        ))
+    ) {
+      throw new TypeError(&quot;Widget state imageIds must be an array of strings&quot;);
+    }
+    if (storedState.imageIds?.length &gt; 0) {
+      throw Object.assign(
+        new TypeError(&quot;Visualization state does not support image attachments&quot;),
+        { code: -32602, data: { code: &quot;images_unsupported&quot; } },
+      );
+    }
+    state = storedState;
+    globalThis.openai.widgetState = state;
+    globalThis.dispatchEvent(
+      new CustomEvent(&quot;openai:set_globals&quot;, {
+        detail: { globals: { widgetState: state } },
+      }),
+    );
+    if (statePersistence === &quot;none&quot;) {
+      throw persistenceError();
+    }
+    const id = ++nextStateRequestId;
+    return new Promise((resolve, reject) =&gt; {
+      const timeout = globalThis.setTimeout(() =&gt; {
+        pendingStateWrites.delete(id);
+        reject(persistenceError());
+      }, 30_000);
+      pendingStateWrites.set(id, { resolve, reject, timeout, serializedState });
+      postToHost(&quot;widget-state-write&quot;, { id, state: serializedState });
+    });
+  };
+  const syncTheme = () =&gt; {
+    const theme = mediaQuery.matches ? &quot;dark&quot; : &quot;light&quot;;
+    root.dataset.theme = theme;
+    globalThis.openai = {
+      ...globalThis.openai,
+      openExternal,
+      sendFollowUpMessage,
+      setWidgetState,
+      theme,
+      visualizationStyleVariables: {},
+      visualizationTheme: theme,
+      widgetState: state,
+      statePersistence,
+      stateModelContext: &quot;none&quot;,
+    };
+    globalThis.dispatchEvent(
+      new CustomEvent(&quot;openai:set_globals&quot;, {
+        detail: { globals: globalThis.openai },
+      }),
+    );
+  };
+  const sendHeight = () =&gt; {
+    postToHost(&quot;height&quot;, {
+      height: Math.ceil(
+        Math.max(
+          document.body.scrollHeight,
+          document.body.getBoundingClientRect().height,
+        ),
+      ),
+    });
+  };
+
+  globalThis.addEventListener(
+    &quot;message&quot;,
+    (event) =&gt; {
+      const data = apply(getMessageData, event, []);
+      const ports = apply(getMessagePorts, event, []);
+      const source = apply(getMessageSource, event, []);
+      if (
+        hostPort != null ||
+        source !== parentWindow ||
+        typeof data !== &quot;object&quot; ||
+        data?.type !== &quot;codex-visualization-initialize&quot; ||
+        !isArray(ports) ||
+        ports.length !== 1
+      ) {
+        return;
+      }
+      apply(stopMessagePropagation, event, []);
+      const nextHostPort = ports[0];
+      try {
+        apply(addHostMessageListener, nextHostPort, [
+          &quot;message&quot;,
+          (event) =&gt; {
+            const data = apply(getMessageData, event, []);
+            if (typeof data === &quot;object&quot; &amp;&amp; data?.type === &quot;measure&quot;) {
+              sendHeight();
+            } else if (
+              typeof data === &quot;object&quot; &amp;&amp;
+              data?.type === &quot;widget-state-result&quot;
+            ) {
+              /** @type {unknown} */
+              const id = data.id;
+              if (typeof id !== &quot;number&quot;) {
+                return;
+              }
+              const pending = pendingStateWrites.get(id);
+              if (pending != null) {
+                pendingStateWrites.delete(id);
+                globalThis.clearTimeout(pending.timeout);
+                if (data.ok === true) {
+                  pending.resolve();
+                } else {
+                  pending.reject(persistenceError());
+                }
+              }
+            }
+          },
+        ]);
+        apply(startHostPort, nextHostPort, []);
+      } catch {
+        return;
+      }
+      hostPort = nextHostPort;
+      for (const [id, { serializedState }] of pendingStateWrites) {
+        postToHost(&quot;widget-state-write&quot;, { id, state: serializedState });
+      }
+      sendHeight();
+    },
+    { capture: true },
+  );
+  document.currentScript?.remove();
+  mediaQuery.addEventListener(&quot;change&quot;, syncTheme);
+  globalThis.addEventListener(&quot;click&quot;, (event) =&gt; {
+    if (event.defaultPrevented) {
+      return;
+    }
+    let element = null;
+    if (event.target instanceof globalThis.Element) {
+      element = event.target;
+    } else if (event.target instanceof globalThis.Node) {
+      element = event.target.parentElement;
+    }
+    const link = element?.closest(&quot;a[href]&quot;);
+    const href = link?.getAttribute(&quot;href&quot;);
+    if (href == null) {
+      return;
+    }
+    if (href.startsWith(&quot;#&quot;)) {
+      let id;
+      try {
+        id = decodeURIComponent(href.slice(1));
+      } catch {
+        return;
+      }
+      const target = id.length === 0 ? root : document.getElementById(id);
+      if (
+        target == null ||
+        globalThis.navigator.userActivation?.isActive !== true
+      ) {
+        return;
+      }
+      event.preventDefault();
+      postToHost(&quot;scroll-to&quot;, {
+        top: target.getBoundingClientRect().top + globalThis.scrollY,
+      });
+      return;
+    }
+    event.preventDefault();
+    openExternal({ href });
+  });
+  new ResizeObserver(sendHeight).observe(document.body);
+  syncTheme();
+})();
+&lt;/script&gt;
+&lt;div id=&quot;crd&quot;&gt;
+  &lt;style&gt;
+    #crd {
+      --p-primary: light-dark(#2b56c9, #7d9cff);
+      --p-primary-fg: light-dark(#ffffff, #10141f);
+      --p-primary-hover: light-dark(#24479f, #93aeff);
+      --p-primary-soft: light-dark(#eef2fd, #1c2440);
+      --p-surface: light-dark(#ffffff, #191d23);
+      --p-surface-2: light-dark(#f6f7fa, #14181d);
+      --p-text: light-dark(#1c2530, #e7ecf3);
+      --p-muted: light-dark(#5c6b7e, #93a1b2);
+      --p-faint: light-dark(#8794a6, #66727f);
+      --p-border: light-dark(#e3e7ee, #2a313a);
+      --p-border-strong: light-dark(#d2d9e4, #39424d);
+      --p-high: light-dark(#c62f24, #ff8578);
+      --p-high-soft: light-dark(#fdeceb, #3b1d1a);
+      --p-mid: light-dark(#a85a08, #f2b175);
+      --p-mid-soft: light-dark(#fdf2e6, #362614);
+      --p-info: light-dark(#2f6bb0, #8cc0f5);
+      --p-info-soft: light-dark(#eaf3fc, #16283c);
+      --p-ok: light-dark(#1a7a42, #6fd096);
+      --p-ok-soft: light-dark(#e9f6ee, #16301f);
+      --p-shadow: 0 18px 50px -28px light-dark(rgb(23 32 54 / 45%), rgb(0 0 0 / 72%));
+      font-family: -apple-system, &quot;Segoe UI&quot;, &quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, &quot;Noto Sans SC&quot;, system-ui, sans-serif;
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--p-text);
+      background: transparent;
+    }
+    #crd,
+    #crd * {
+      box-sizing: border-box;
+    }
+    #crd p,
+    #crd h1,
+    #crd h2,
+    #crd h3,
+    #crd h4,
+    #crd ul,
+    #crd ol,
+    #crd dl,
+    #crd dt,
+    #crd dd {
+      margin: 0;
+    }
+    #crd ul,
+    #crd ol {
+      padding: 0;
+      list-style: none;
+    }
+    #crd button {
+      font: inherit;
+      color: inherit;
+    }
+    #crd [hidden] {
+      display: none !important;
+    }
+    #crd [data-lucide],
+    #crd .lucide {
+      width: 16px;
+      height: 16px;
+      display: inline-block;
+      flex: none;
+    }
+    #crd .crd-window {
+      position: relative;
+      background: var(--p-surface);
+      border: 1px solid var(--p-border);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: var(--p-shadow);
+    }
+
+    /* ---------- top bar ---------- */
+    #crd .crd-topbar {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      padding: 10px 96px 10px 14px;
+      border-bottom: 1px solid var(--p-border);
+      background: var(--p-surface);
+    }
+    #crd .crd-brand {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      min-width: 0;
+    }
+    #crd .crd-logo {
+      width: 30px;
+      height: 30px;
+      border-radius: 9px;
+      background: var(--p-primary);
+      color: var(--p-primary-fg);
+      display: grid;
+      place-items: center;
+      flex: none;
+    }
+    #crd .crd-brand-name {
+      font-size: 14px;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    #crd .crd-badge {
+      font-size: 11px;
+      color: var(--p-primary);
+      background: var(--p-primary-soft);
+      border-radius: 999px;
+      padding: 1px 8px;
+      white-space: nowrap;
+    }
+    #crd .crd-file {
+      flex: 1 1 240px;
+      min-width: 0;
+      text-align: center;
+    }
+    #crd .crd-file-name {
+      font-size: 13px;
+      font-weight: 500;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    #crd .crd-file-meta {
+      font-size: 11px;
+      color: var(--p-muted);
+    }
+    #crd .crd-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-left: auto;
+    }
+    #crd .crd-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      height: 32px;
+      padding: 0 12px;
+      border-radius: 8px;
+      border: 1px solid var(--p-border-strong);
+      background: var(--p-surface);
+      color: var(--p-text);
+      font-size: 13px;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+    #crd .crd-btn:not(:disabled):hover {
+      background: var(--p-surface-2);
+    }
+    #crd .crd-btn:disabled {
+      opacity: 0.55;
+      cursor: default;
+    }
+    #crd .crd-btn--primary {
+      background: var(--p-primary);
+      border-color: transparent;
+      color: var(--p-primary-fg);
+    }
+    #crd .crd-btn--primary:not(:disabled):hover {
+      background: var(--p-primary-hover);
+    }
+    #crd .crd-icon-btn {
+      width: 30px;
+      height: 30px;
+      display: grid;
+      place-items: center;
+      border-radius: 8px;
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--p-muted);
+      cursor: pointer;
+    }
+    #crd .crd-icon-btn:not(:disabled):hover {
+      background: var(--p-surface-2);
+      color: var(--p-text);
+    }
+
+    /* ---------- scan bar + metrics ---------- */
+    #crd .crd-scan {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 7px 14px;
+      border-bottom: 1px solid var(--p-border);
+      background: var(--p-primary-soft);
+      color: var(--p-primary);
+      font-size: 12px;
+    }
+    #crd .crd-scan-track {
+      flex: 1;
+      height: 3px;
+      border-radius: 999px;
+      background: color-mix(in srgb, var(--p-primary) 18%, transparent);
+      overflow: hidden;
+    }
+    #crd .crd-scan-fill {
+      height: 100%;
+      width: 0;
+      border-radius: 999px;
+      background: var(--p-primary);
+      transition: width 0.32s ease;
+    }
+    #crd .crd-metrics {
+      display: flex;
+      flex-wrap: wrap;
+      border-bottom: 1px solid var(--p-border);
+      background: var(--p-surface-2);
+    }
+    #crd .crd-metric {
+      flex: 1 1 150px;
+      min-width: 0;
+      padding: 9px 14px;
+      border-right: 1px solid var(--p-border);
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+    #crd .crd-metric:last-child {
+      border-right: 0;
+    }
+    #crd .crd-metric-label {
+      font-size: 11px;
+      color: var(--p-muted);
+    }
+    #crd .crd-metric-value {
+      font-size: 15px;
+      font-weight: 500;
+      font-variant-numeric: tabular-nums;
+    }
+    #crd .crd-metric-note {
+      font-size: 11px;
+      color: var(--p-faint);
+    }
+
+    /* ---------- main grid ---------- */
+    #crd .crd-body {
+      display: grid;
+      grid-template-columns: 184px minmax(0, 1fr) 380px;
+      align-items: stretch;
+    }
+
+    /* ---------- sidebar ---------- */
+    #crd .crd-side {
+      border-right: 1px solid var(--p-border);
+      background: var(--p-surface-2);
+      padding: 12px 10px;
+    }
+    #crd .crd-side-cap {
+      font-size: 11px;
+      color: var(--p-faint);
+      padding: 0 9px 6px;
+    }
+    #crd .crd-side-cap--gap {
+      padding-top: 14px;
+    }
+    #crd .crd-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    #crd .crd-nav-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      width: 100%;
+      padding: 7px 9px;
+      border-radius: 8px;
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--p-muted);
+      font-size: 13px;
+      text-align: left;
+      cursor: pointer;
+    }
+    #crd .crd-nav-item:not(.is-active):hover {
+      background: color-mix(in srgb, var(--p-text) 7%, transparent);
+      color: var(--p-text);
+    }
+    #crd .crd-nav-item.is-active {
+      background: var(--p-primary-soft);
+      color: var(--p-primary);
+      font-weight: 500;
+    }
+    #crd .crd-side-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding: 0 9px;
+    }
+    #crd .crd-side-meta dt {
+      font-size: 11px;
+      color: var(--p-faint);
+    }
+    #crd .crd-side-meta dd {
+      font-size: 12px;
+      color: var(--p-muted);
+    }
+
+    /* ---------- document pane ---------- */
+    #crd .crd-doc {
+      min-width: 0;
+      border-right: 1px solid var(--p-border);
+      background: var(--p-surface);
+    }
+    #crd .crd-doc-head {
+      padding: 11px 14px 10px;
+      border-bottom: 1px solid var(--p-border);
+    }
+    #crd .crd-doc-title-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    #crd .crd-doc-title {
+      font-size: 14px;
+      font-weight: 500;
+    }
+    #crd .crd-doc-sub {
+      font-size: 11px;
+      color: var(--p-muted);
+    }
+    #crd .crd-legend {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-left: auto;
+      font-size: 11px;
+      color: var(--p-muted);
+    }
+    #crd .crd-legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    #crd .crd-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 3px;
+      display: inline-block;
+    }
+    #crd .crd-dot--high {
+      background: var(--p-high);
+    }
+    #crd .crd-dot--mid {
+      background: var(--p-mid);
+    }
+    #crd .crd-dot--info {
+      background: var(--p-info);
+    }
+    #crd .crd-locate {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 7px;
+      font-size: 11px;
+      color: var(--p-muted);
+    }
+    #crd .crd-locate.is-hit {
+      color: var(--p-primary);
+    }
+    #crd .crd-doc-body {
+      padding: 4px 14px 12px;
+    }
+    #crd .crd-clause {
+      padding: 10px 8px;
+      margin: 0 -8px;
+      border-bottom: 1px solid var(--p-border);
+      border-radius: 8px;
+      transition: background 0.15s ease;
+    }
+    #crd .crd-clause:last-child {
+      border-bottom: 0;
+    }
+    #crd .crd-clause.is-active {
+      background: color-mix(in srgb, var(--p-primary) 7%, transparent);
+    }
+    #crd .crd-clause-head {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    #crd .crd-clause-no {
+      font-size: 11px;
+      color: var(--p-muted);
+      background: var(--p-surface-2);
+      border: 1px solid var(--p-border);
+      border-radius: 6px;
+      padding: 0 6px;
+      white-space: nowrap;
+    }
+    #crd .crd-clause-title {
+      font-size: 13px;
+      font-weight: 500;
+    }
+    #crd .crd-clause-text {
+      margin-top: 5px;
+      font-size: 13px;
+      line-height: 1.75;
+      color: var(--p-text);
+    }
+    #crd .crd-chip {
+      margin-left: auto;
+      font-size: 11px;
+      border-radius: 999px;
+      padding: 1px 8px;
+      white-space: nowrap;
+      color: var(--p-muted);
+      background: var(--p-surface-2);
+      border: 1px solid var(--p-border);
+    }
+    #crd .crd-chip--high {
+      color: var(--p-high);
+      background: var(--p-high-soft);
+      border-color: transparent;
+    }
+    #crd .crd-chip--mid {
+      color: var(--p-mid);
+      background: var(--p-mid-soft);
+      border-color: transparent;
+    }
+    #crd .crd-chip--info {
+      color: var(--p-info);
+      background: var(--p-info-soft);
+      border-color: transparent;
+    }
+    #crd .crd-chip--ok {
+      color: var(--p-ok);
+      background: var(--p-ok-soft);
+      border-color: transparent;
+    }
+    #crd .crd-mark {
+      color: inherit;
+      background: var(--p-high-soft);
+      border-bottom: 2px solid var(--p-high);
+      border-radius: 3px 3px 0 0;
+      padding: 0 1px;
+      cursor: pointer;
+    }
+    #crd .crd-mark--mid {
+      background: var(--p-mid-soft);
+      border-bottom-color: var(--p-mid);
+    }
+    #crd .crd-mark--info {
+      background: var(--p-info-soft);
+      border-bottom-color: var(--p-info);
+    }
+    #crd .crd-mark.is-active {
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--p-high) 24%, transparent);
+    }
+    #crd .crd-mark--mid.is-active {
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--p-mid) 24%, transparent);
+    }
+    #crd .crd-mark--info.is-active {
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--p-info) 24%, transparent);
+    }
+    #crd .crd-mark.is-adopted {
+      background: var(--p-ok-soft);
+      border-bottom-color: var(--p-ok);
+    }
+    #crd .crd-ref {
+      display: inline-block;
+      min-width: 15px;
+      margin-left: 3px;
+      padding: 0 3px;
+      border-radius: 4px;
+      font-size: 11px;
+      line-height: 15px;
+      font-weight: 500;
+      text-align: center;
+      vertical-align: 2px;
+      background: var(--p-high);
+      color: light-dark(#ffffff, #2b1210);
+    }
+    #crd .crd-mark--mid .crd-ref {
+      background: var(--p-mid);
+      color: light-dark(#ffffff, #2c1c0c);
+    }
+    #crd .crd-mark--info .crd-ref {
+      background: var(--p-info);
+      color: light-dark(#ffffff, #0f2233);
+    }
+
+    /* ---------- findings panel ---------- */
+    #crd .crd-panel {
+      min-width: 0;
+      background: var(--p-surface);
+      display: flex;
+      flex-direction: column;
+    }
+    #crd .crd-panel-head {
+      padding: 11px 14px 10px;
+      border-bottom: 1px solid var(--p-border);
+    }
+    #crd .crd-panel-title-row {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+    #crd .crd-panel-title {
+      font-size: 14px;
+      font-weight: 500;
+    }
+    #crd .crd-panel-count {
+      margin-left: auto;
+      font-size: 11px;
+      color: var(--p-muted);
+      font-variant-numeric: tabular-nums;
+    }
+    #crd .crd-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 9px;
+    }
+    #crd .crd-filter {
+      height: 25px;
+      padding: 0 10px;
+      border-radius: 999px;
+      border: 1px solid var(--p-border);
+      background: var(--p-surface);
+      color: var(--p-muted);
+      font-size: 11px;
+      cursor: pointer;
+    }
+    #crd .crd-filter:hover {
+      border-color: var(--p-border-strong);
+      color: var(--p-text);
+    }
+    #crd .crd-filter[aria-pressed=&quot;true&quot;] {
+      background: var(--p-primary-soft);
+      border-color: color-mix(in srgb, var(--p-primary) 35%, transparent);
+      color: var(--p-primary);
+      font-weight: 500;
+    }
+    #crd .crd-finding-list {
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    #crd .crd-finding {
+      border: 1px solid var(--p-border);
+      border-radius: 10px;
+      background: var(--p-surface);
+      overflow: hidden;
+    }
+    #crd .crd-finding.is-active {
+      border-color: color-mix(in srgb, var(--p-primary) 45%, var(--p-border));
+      box-shadow: 0 0 0 2px color-mix(in srgb, var(--p-primary) 12%, transparent);
+    }
+    #crd .crd-finding.is-adopted {
+      border-color: color-mix(in srgb, var(--p-ok) 40%, var(--p-border));
+    }
+    #crd .crd-finding-head {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      width: 100%;
+      padding: 10px 12px;
+      border: 0;
+      background: transparent;
+      text-align: left;
+      cursor: pointer;
+    }
+    #crd .crd-finding-head:hover {
+      background: color-mix(in srgb, var(--p-text) 4%, transparent);
+    }
+    #crd .crd-row1 {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    #crd .crd-sev {
+      font-size: 11px;
+      border-radius: 999px;
+      padding: 1px 7px;
+      white-space: nowrap;
+      flex: none;
+    }
+    #crd .crd-sev--high {
+      color: var(--p-high);
+      background: var(--p-high-soft);
+    }
+    #crd .crd-sev--mid {
+      color: var(--p-mid);
+      background: var(--p-mid-soft);
+    }
+    #crd .crd-sev--info {
+      color: var(--p-info);
+      background: var(--p-info-soft);
+    }
+    #crd .crd-finding-title {
+      flex: 1;
+      min-width: 0;
+      font-size: 13px;
+      font-weight: 500;
+    }
+    #crd .crd-finding-loc {
+      flex: none;
+      font-size: 11px;
+      color: var(--p-muted);
+      background: var(--p-surface-2);
+      border: 1px solid var(--p-border);
+      border-radius: 6px;
+      padding: 0 6px;
+      font-variant-numeric: tabular-nums;
+    }
+    #crd .crd-adopted-tag {
+      flex: none;
+      font-size: 11px;
+      color: var(--p-ok);
+      background: var(--p-ok-soft);
+      border-radius: 999px;
+      padding: 1px 7px;
+    }
+    #crd .crd-row2 {
+      display: flex;
+      align-items: baseline;
+      gap: 7px;
+    }
+    #crd .crd-src {
+      flex: none;
+      font-size: 11px;
+      color: var(--p-primary);
+      background: var(--p-primary-soft);
+      border-radius: 6px;
+      padding: 0 6px;
+      white-space: nowrap;
+    }
+    #crd .crd-quote {
+      font-size: 12px;
+      color: var(--p-muted);
+    }
+    #crd .crd-finding-detail {
+      padding: 0 12px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+    #crd .crd-desc {
+      font-size: 12px;
+      color: var(--p-text);
+    }
+    #crd .crd-basis {
+      background: var(--p-surface-2);
+      border-radius: 8px;
+      padding: 8px 10px;
+    }
+    #crd .crd-basis-label {
+      display: block;
+      font-size: 11px;
+      color: var(--p-faint);
+      margin-bottom: 2px;
+    }
+    #crd .crd-basis p {
+      font-size: 12px;
+      color: var(--p-muted);
+    }
+    #crd .crd-suggest {
+      background: var(--p-primary-soft);
+      border-radius: 8px;
+      padding: 9px 10px;
+    }
+    #crd .crd-suggest-head {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--p-primary);
+    }
+    #crd .crd-adopt {
+      margin-left: auto;
+      height: 25px;
+      padding: 0 10px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      background: var(--p-primary);
+      color: var(--p-primary-fg);
+      font-size: 11px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    #crd .crd-adopt[aria-pressed=&quot;true&quot;] {
+      background: var(--p-ok-soft);
+      border-color: color-mix(in srgb, var(--p-ok) 45%, transparent);
+      color: var(--p-ok);
+    }
+    #crd .crd-suggest-text {
+      margin-top: 6px;
+      font-size: 12px;
+      color: var(--p-text);
+    }
+    #crd .crd-panel-foot {
+      margin-top: auto;
+      padding: 10px 14px 12px;
+      border-top: 1px solid var(--p-border);
+      font-size: 11px;
+      color: var(--p-faint);
+    }
+
+    /* ---------- report modal + toast ---------- */
+    #crd .crd-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 40;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: light-dark(rgb(20 27 45 / 45%), rgb(0 0 0 / 62%));
+    }
+    #crd .crd-modal {
+      width: min(580px, 100%);
+      background: var(--p-surface);
+      border: 1px solid var(--p-border);
+      border-radius: 12px;
+      box-shadow: var(--p-shadow);
+      overflow: hidden;
+    }
+    #crd .crd-modal-head {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 13px 16px;
+      border-bottom: 1px solid var(--p-border);
+    }
+    #crd .crd-modal-title {
+      font-size: 14px;
+      font-weight: 500;
+    }
+    #crd .crd-modal-sub {
+      margin-top: 2px;
+      font-size: 11px;
+      color: var(--p-muted);
+    }
+    #crd .crd-modal-head .crd-icon-btn {
+      margin-left: auto;
+    }
+    #crd .crd-modal-body {
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    #crd .crd-verdict {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      background: var(--p-high-soft);
+      border-radius: 10px;
+      padding: 10px 12px;
+    }
+    #crd .crd-verdict-badge {
+      flex: none;
+      font-size: 11px;
+      border-radius: 999px;
+      padding: 2px 9px;
+      background: var(--p-high);
+      color: light-dark(#ffffff, #2b1210);
+      white-space: nowrap;
+    }
+    #crd .crd-verdict p {
+      font-size: 12px;
+      color: var(--p-text);
+    }
+    #crd .crd-report-stats {
+      font-size: 12px;
+      color: var(--p-muted);
+      font-variant-numeric: tabular-nums;
+    }
+    #crd .crd-report-label {
+      display: block;
+      font-size: 11px;
+      color: var(--p-faint);
+      margin-bottom: 5px;
+    }
+    #crd .crd-report-list {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding-left: 18px;
+      list-style: decimal;
+      font-size: 12px;
+    }
+    #crd .crd-report-note {
+      font-size: 11px;
+      color: var(--p-faint);
+    }
+    #crd .crd-modal-foot {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      padding: 12px 16px;
+      border-top: 1px solid var(--p-border);
+      background: var(--p-surface-2);
+    }
+    #crd .crd-toast {
+      position: absolute;
+      left: 50%;
+      bottom: 16px;
+      transform: translateX(-50%);
+      z-index: 50;
+      max-width: calc(100% - 32px);
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: light-dark(#1d2735, #e8edf5);
+      color: light-dark(#ffffff, #11151c);
+      font-size: 12px;
+      text-align: center;
+      box-shadow: var(--p-shadow);
+    }
+
+    /* ---------- responsive ---------- */
+    @media (max-width: 1120px) {
+      #crd .crd-body {
+        grid-template-columns: minmax(0, 1fr) 372px;
+      }
+      #crd .crd-side {
+        grid-column: 1 / -1;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 4px 8px;
+        padding: 8px 12px;
+        border-right: 0;
+        border-bottom: 1px solid var(--p-border);
+      }
+      #crd .crd-side-cap,
+      #crd .crd-side-meta {
+        display: none;
+      }
+      #crd .crd-nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 4px;
+      }
+      #crd .crd-nav-item {
+        width: auto;
+      }
+    }
+    @media (max-width: 840px) {
+      #crd .crd-body {
+        grid-template-columns: minmax(0, 1fr) 322px;
+      }
+      #crd .crd-topbar {
+        padding-right: 16px;
+      }
+      #crd .crd-file {
+        order: 3;
+        flex-basis: 100%;
+        text-align: left;
+      }
+    }
+    @media (max-width: 680px) {
+      #crd .crd-body {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      #crd .crd-doc {
+        border-right: 0;
+        border-bottom: 1px solid var(--p-border);
+      }
+    }
+  &lt;/style&gt;
+
+  &lt;div class=&quot;crd-window&quot;&gt;
+    &lt;header class=&quot;crd-topbar&quot;&gt;
+      &lt;div class=&quot;crd-brand&quot;&gt;
+        &lt;span class=&quot;crd-logo&quot;&gt;&lt;i data-lucide=&quot;shield-check&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+        &lt;span class=&quot;crd-brand-name&quot;&gt;合同智审通&lt;/span&gt;
+        &lt;span class=&quot;crd-badge&quot;&gt;M1 演示版&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;crd-file&quot;&gt;
+        &lt;div class=&quot;crd-file-name&quot;&gt;设备采购合同（评审稿）.docx&lt;/div&gt;
+        &lt;div class=&quot;crd-file-meta&quot;&gt;第 3 轮审查 · 共 9 条条款 · 甲方：东浩兰生集团有限公司&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;crd-actions&quot;&gt;
+        &lt;button type=&quot;button&quot; class=&quot;crd-btn&quot; id=&quot;crd-rescan&quot;&gt;
+          &lt;i data-lucide=&quot;refresh-cw&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span&gt;重新审查&lt;/span&gt;
+        &lt;/button&gt;
+        &lt;button type=&quot;button&quot; class=&quot;crd-btn crd-btn--primary&quot; id=&quot;crd-report-btn&quot;&gt;
+          &lt;i data-lucide=&quot;file-text&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span&gt;生成审查报告&lt;/span&gt;
+        &lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/header&gt;
+
+    &lt;div class=&quot;crd-scan&quot; id=&quot;crd-scan&quot; hidden&gt;
+      &lt;span id=&quot;crd-scan-label&quot;&gt;解析合同文本…&lt;/span&gt;
+      &lt;span class=&quot;crd-scan-track&quot;&gt;&lt;span class=&quot;crd-scan-fill&quot; id=&quot;crd-scan-fill&quot;&gt;&lt;/span&gt;&lt;/span&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;crd-metrics&quot;&gt;
+      &lt;div class=&quot;crd-metric&quot;&gt;
+        &lt;span class=&quot;crd-metric-label&quot;&gt;风险发现&lt;/span&gt;
+        &lt;span class=&quot;crd-metric-value&quot;&gt;9 项&lt;/span&gt;
+        &lt;span class=&quot;crd-metric-note&quot;&gt;高风险 2 · 中风险 4 · 提示 3&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;crd-metric&quot;&gt;
+        &lt;span class=&quot;crd-metric-label&quot;&gt;条款覆盖&lt;/span&gt;
+        &lt;span class=&quot;crd-metric-value&quot;&gt;9 / 9&lt;/span&gt;
+        &lt;span class=&quot;crd-metric-note&quot;&gt;全文条款 100% 覆盖&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;crd-metric&quot;&gt;
+        &lt;span class=&quot;crd-metric-label&quot;&gt;审查耗时&lt;/span&gt;
+        &lt;span class=&quot;crd-metric-value&quot; id=&quot;crd-time&quot;&gt;42 秒&lt;/span&gt;
+        &lt;span class=&quot;crd-metric-note&quot; id=&quot;crd-time-note&quot;&gt;人工预审约 2 小时&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;crd-metric&quot;&gt;
+        &lt;span class=&quot;crd-metric-label&quot;&gt;建议采纳&lt;/span&gt;
+        &lt;span class=&quot;crd-metric-value&quot; id=&quot;crd-adopted&quot;&gt;0 / 9&lt;/span&gt;
+        &lt;span class=&quot;crd-metric-note&quot;&gt;采纳后自动写入审查报告&lt;/span&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;crd-body&quot;&gt;
+      &lt;nav class=&quot;crd-side&quot; aria-label=&quot;工作区导航&quot;&gt;
+        &lt;p class=&quot;crd-side-cap&quot;&gt;工作区&lt;/p&gt;
+        &lt;ul class=&quot;crd-nav&quot;&gt;
+          &lt;li&gt;
+            &lt;button type=&quot;button&quot; class=&quot;crd-nav-item is-active&quot; aria-current=&quot;page&quot;&gt;
+              &lt;i data-lucide=&quot;scan-search&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span&gt;审查工作台&lt;/span&gt;
+            &lt;/button&gt;
+          &lt;/li&gt;
+          &lt;li&gt;
+            &lt;button type=&quot;button&quot; class=&quot;crd-nav-item&quot;&gt;
+              &lt;i data-lucide=&quot;folder-open&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span&gt;合同库&lt;/span&gt;
+            &lt;/button&gt;
+          &lt;/li&gt;
+          &lt;li&gt;
+            &lt;button type=&quot;button&quot; class=&quot;crd-nav-item&quot;&gt;
+              &lt;i data-lucide=&quot;sliders-horizontal&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span&gt;规则库&lt;/span&gt;
+            &lt;/button&gt;
+          &lt;/li&gt;
+          &lt;li&gt;
+            &lt;button type=&quot;button&quot; class=&quot;crd-nav-item&quot;&gt;
+              &lt;i data-lucide=&quot;book-open&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span&gt;知识库&lt;/span&gt;
+            &lt;/button&gt;
+          &lt;/li&gt;
+          &lt;li&gt;
+            &lt;button type=&quot;button&quot; class=&quot;crd-nav-item&quot;&gt;
+              &lt;i data-lucide=&quot;file-text&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span&gt;报告中心&lt;/span&gt;
+            &lt;/button&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+        &lt;p class=&quot;crd-side-cap crd-side-cap--gap&quot;&gt;当前审查基准&lt;/p&gt;
+        &lt;dl class=&quot;crd-side-meta&quot;&gt;
+          &lt;div&gt;
+            &lt;dt&gt;制度依据&lt;/dt&gt;
+            &lt;dd&gt;集团《合同管理办法》v3.2&lt;/dd&gt;
+          &lt;/div&gt;
+          &lt;div&gt;
+            &lt;dt&gt;法务知识库&lt;/dt&gt;
+            &lt;dd&gt;1,286 条判例与范本&lt;/dd&gt;
+          &lt;/div&gt;
+          &lt;div&gt;
+            &lt;dt&gt;审查规则&lt;/dt&gt;
+            &lt;dd&gt;342 条规则库条目&lt;/dd&gt;
+          &lt;/div&gt;
+        &lt;/dl&gt;
+      &lt;/nav&gt;
+
+      &lt;section class=&quot;crd-doc&quot; aria-label=&quot;合同正文&quot;&gt;
+        &lt;div class=&quot;crd-doc-head&quot;&gt;
+          &lt;div class=&quot;crd-doc-title-row&quot;&gt;
+            &lt;span class=&quot;crd-doc-title&quot;&gt;合同正文 · 评审稿&lt;/span&gt;
+            &lt;span class=&quot;crd-doc-sub&quot;&gt;7 条存在风险 · 2 条合规通过&lt;/span&gt;
+            &lt;span class=&quot;crd-legend&quot;&gt;
+              &lt;span class=&quot;crd-legend-item&quot;&gt;&lt;span class=&quot;crd-dot crd-dot--high&quot;&gt;&lt;/span&gt;高风险&lt;/span&gt;
+              &lt;span class=&quot;crd-legend-item&quot;&gt;&lt;span class=&quot;crd-dot crd-dot--mid&quot;&gt;&lt;/span&gt;中风险&lt;/span&gt;
+              &lt;span class=&quot;crd-legend-item&quot;&gt;&lt;span class=&quot;crd-dot crd-dot--info&quot;&gt;&lt;/span&gt;提示&lt;/span&gt;
+            &lt;/span&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;crd-locate&quot; id=&quot;crd-locate&quot; aria-live=&quot;polite&quot;&gt;
+            &lt;i data-lucide=&quot;scan-search&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;
+            &lt;span&gt;点击右侧审查意见或正文标注，可双向定位条款&lt;/span&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;crd-doc-body&quot;&gt;
+          &lt;article class=&quot;crd-clause&quot; data-clause=&quot;1&quot;&gt;
+            &lt;div class=&quot;crd-clause-head&quot;&gt;
+              &lt;span class=&quot;crd-clause-no&quot;&gt;第 1 条&lt;/span&gt;
+              &lt;h4 class=&quot;crd-clause-title&quot;&gt;合同主体与标的&lt;/h4&gt;
+              &lt;span class=&quot;crd-chip crd-chip--ok&quot;&gt;合规通过&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;p class=&quot;crd-clause-text&quot;&gt;甲方：东浩兰生集团有限公司（采购方）；乙方：智联装备（上海）有限公司（供应方）。双方主体资格、住所、联系人及送达地址信息完整。采购标的为智能仓储分拣设备 6 套，规格型号、数量、含税单价及总价已在附件中明确。&lt;/p&gt;
+          &lt;/article&gt;
+
+          &lt;article class=&quot;crd-clause&quot; data-clause=&quot;2&quot;&gt;
+            &lt;div class=&quot;crd-clause-head&quot;&gt;
+              &lt;span class=&quot;crd-clause-no&quot;&gt;第 2 条&lt;/span&gt;
+              &lt;h4 class=&quot;crd-clause-title&quot;&gt;合同价款与支付&lt;/h4&gt;
+              &lt;span class=&quot;crd-chip&quot; data-clause-status=&quot;2&quot;&gt;&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;p class=&quot;crd-clause-text&quot;&gt;本合同含税总价为人民币 8,600,000.00 元。&lt;mark class=&quot;crd-mark crd-mark--high&quot; data-finding=&quot;f1&quot;&gt;合同签订后 7 个工作日内，甲方向乙方支付合同总额 50% 的预付款&lt;span class=&quot;crd-ref&quot;&gt;1&lt;/span&gt;&lt;/mark&gt;；设备安装调试并验收合格后 30 日内支付剩余款项。&lt;mark class=&quot;crd-mark crd-mark--info&quot; data-finding=&quot;f8&quot;&gt;乙方收到预付款后 5 个工作日内，向甲方开具合同全额增值税专用发票&lt;span class=&quot;crd-ref&quot;&gt;8&lt;/span&gt;&lt;/mark&gt;。&lt;/p&gt;
+          &lt;/article&gt;
+
+          &lt;article class=&quot;crd-clause&quot; data-clause=&quot;3&quot;&gt;
+            &lt;div class=&quot;crd-clause-head&quot;&gt;
+              &lt;span class=&quot;crd-clause-no&quot;&gt;第 3 条&lt;/span&gt;
+              &lt;h4 class=&quot;crd-clause-title&quot;&gt;交付与验收&lt;/h4&gt;
+              &lt;span class=&quot;crd-chip&quot; data-clause-status=&quot;3&quot;&gt;&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;p class=&quot;crd-clause-text&quot;&gt;乙方应于 2026 年 12 月 31 日前完成设备交付、安装与调试。&lt;mark class=&quot;crd-mark crd-mark--mid&quot; data-finding=&quot;f3&quot;&gt;设备应符合甲方要求的标准&lt;span class=&quot;crd-ref&quot;&gt;3&lt;/span&gt;&lt;/mark&gt;，并具备连续 72 小时稳定运行能力。验收由甲方组织，验收合格后双方签署验收确认单。&lt;/p&gt;
+          &lt;/article&gt;
+
+          &lt;article class=&quot;crd-clause&quot; data-clause=&quot;4&quot;&gt;
+            &lt;div class=&quot;crd-clause-head&quot;&gt;
+              &lt;span class=&quot;crd-clause-no&quot;&gt;第 4 条&lt;/span&gt;
+              &lt;h4 class=&quot;crd-clause-title&quot;&gt;违约责任&lt;/h4&gt;
+              &lt;span class=&quot;crd-chip&quot; data-clause-status=&quot;4&quot;&gt;&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;p class=&quot;crd-clause-text&quot;&gt;因乙方原因导致设备无法交付的，甲方有权解除合同并要求赔偿。&lt;mark class=&quot;crd-mark crd-mark--high&quot; data-finding=&quot;f2&quot;&gt;乙方逾期交付的，每逾期一日按合同总额的 0.05% 支付违约金，累计不超过合同总额的 5%；甲方无正当理由解除本合同的，应向乙方支付合同总额 30% 的违约金&lt;span class=&quot;crd-ref&quot;&gt;2&lt;/span&gt;&lt;/mark&gt;。&lt;/p&gt;
+          &lt;/article&gt;
+
+          &lt;article class=&quot;crd-clause&quot; data-clause=&quot;5&quot;&gt;
+            &lt;div class=&quot;crd-clause-head&quot;&gt;
+              &lt;span class=&quot;crd-clause-no&quot;&gt;第 5 条&lt;/span&gt;
+              &lt;h4 class=&quot;crd-clause-title&quot;&gt;知识产权&lt;/h4&gt;
+              &lt;span class=&quot;crd-chip&quot; data-clause-status=&quot;5&quot;&gt;&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;p class=&quot;crd-clause-text&quot;&gt;&lt;mark class=&quot;crd-mark crd-mark--mid&quot; data-finding=&quot;f4&quot;&gt;乙方为履行本合同开发或提供的软件、技术文档、图纸等成果，知识产权均归乙方所有，甲方在合同期内仅享有非独占使用权&lt;span class=&quot;crd-ref&quot;&gt;4&lt;/span&gt;&lt;/mark&gt;。甲方提供的资料、商标权属不因本合同发生转移。&lt;/p&gt;
+          &lt;/article&gt;
+
+          &lt;article class=&quot;crd-clause&quot; data-clause=&quot;6&quot;&gt;
+            &lt;div class=&quot;crd-clause-head&quot;&gt;
+              &lt;span class=&quot;crd-clause-no&quot;&gt;第 6 条&lt;/span&gt;
+              &lt;h4 class=&quot;crd-clause-title&quot;&gt;保密与数据安全&lt;/h4&gt;
+              &lt;span class=&quot;crd-chip&quot; data-clause-status=&quot;6&quot;&gt;&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;p class=&quot;crd-clause-text&quot;&gt;双方应对履约过程中知悉的对方商业秘密承担保密义务。&lt;mark class=&quot;crd-mark crd-mark--mid&quot; data-finding=&quot;f5&quot;&gt;保密期限为永久有效，且未约定法定披露、已公开信息等例外情形&lt;span class=&quot;crd-ref&quot;&gt;5&lt;/span&gt;&lt;/mark&gt;。&lt;mark class=&quot;crd-mark crd-mark--info&quot; data-finding=&quot;f9&quot;&gt;设备运行数据由乙方采集并回传至乙方云平台，用于设备运维与优化&lt;span class=&quot;crd-ref&quot;&gt;9&lt;/span&gt;&lt;/mark&gt;。未经对方书面许可，不得向第三方披露保密信息。&lt;/p&gt;
+          &lt;/article&gt;
+
+          &lt;article class=&quot;crd-clause&quot; data-clause=&quot;7&quot;&gt;
+            &lt;div class=&quot;crd-clause-head&quot;&gt;
+              &lt;span class=&quot;crd-clause-no&quot;&gt;第 7 条&lt;/span&gt;
+              &lt;h4 class=&quot;crd-clause-title&quot;&gt;不可抗力&lt;/h4&gt;
+              &lt;span class=&quot;crd-chip crd-chip--ok&quot;&gt;合规通过&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;p class=&quot;crd-clause-text&quot;&gt;因地震、台风、疫情等不可抗力致使合同不能履行的，根据不可抗力的影响部分或全部免除责任；受影响方应在 15 日内通知对方并提供有效证明。&lt;/p&gt;
+          &lt;/article&gt;
+
+          &lt;article class=&quot;crd-clause&quot; data-clause=&quot;8&quot;&gt;
+            &lt;div class=&quot;crd-clause-head&quot;&gt;
+              &lt;span class=&quot;crd-clause-no&quot;&gt;第 8 条&lt;/span&gt;
+              &lt;h4 class=&quot;crd-clause-title&quot;&gt;争议解决&lt;/h4&gt;
+              &lt;span class=&quot;crd-chip&quot; data-clause-status=&quot;8&quot;&gt;&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;p class=&quot;crd-clause-text&quot;&gt;本合同的订立、效力、解释与履行均适用中华人民共和国法律。&lt;mark class=&quot;crd-mark crd-mark--mid&quot; data-finding=&quot;f6&quot;&gt;因本合同引起的争议，双方应友好协商解决；协商不成的，提交乙方所在地仲裁委员会仲裁&lt;span class=&quot;crd-ref&quot;&gt;6&lt;/span&gt;&lt;/mark&gt;。&lt;/p&gt;
+          &lt;/article&gt;
+
+          &lt;article class=&quot;crd-clause&quot; data-clause=&quot;9&quot;&gt;
+            &lt;div class=&quot;crd-clause-head&quot;&gt;
+              &lt;span class=&quot;crd-clause-no&quot;&gt;第 9 条&lt;/span&gt;
+              &lt;h4 class=&quot;crd-clause-title&quot;&gt;合同生效与期限&lt;/h4&gt;
+              &lt;span class=&quot;crd-chip&quot; data-clause-status=&quot;9&quot;&gt;&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;p class=&quot;crd-clause-text&quot;&gt;本合同自双方盖章之日起生效，有效期至 2027 年 4 月 30 日。&lt;mark class=&quot;crd-mark crd-mark--info&quot; data-finding=&quot;f7&quot;&gt;合同期满前 30 日，双方均未提出书面异议的，本合同自动续约一年，续约价格按原合同执行&lt;span class=&quot;crd-ref&quot;&gt;7&lt;/span&gt;&lt;/mark&gt;。&lt;/p&gt;
+          &lt;/article&gt;
+        &lt;/div&gt;
+      &lt;/section&gt;
+
+      &lt;aside class=&quot;crd-panel&quot; aria-label=&quot;AI 审查意见&quot;&gt;
+        &lt;div class=&quot;crd-panel-head&quot;&gt;
+          &lt;div class=&quot;crd-panel-title-row&quot;&gt;
+            &lt;h3 class=&quot;crd-panel-title&quot;&gt;AI 审查意见&lt;/h3&gt;
+            &lt;span class=&quot;crd-panel-count&quot; id=&quot;crd-count&quot; aria-live=&quot;polite&quot;&gt;显示 9 / 9&lt;/span&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;crd-filters&quot; role=&quot;group&quot; aria-label=&quot;按风险等级筛选&quot;&gt;
+            &lt;button type=&quot;button&quot; class=&quot;crd-filter&quot; data-filter=&quot;all&quot; aria-pressed=&quot;true&quot;&gt;全部 9&lt;/button&gt;
+            &lt;button type=&quot;button&quot; class=&quot;crd-filter&quot; data-filter=&quot;high&quot; aria-pressed=&quot;false&quot;&gt;高风险 2&lt;/button&gt;
+            &lt;button type=&quot;button&quot; class=&quot;crd-filter&quot; data-filter=&quot;mid&quot; aria-pressed=&quot;false&quot;&gt;中风险 4&lt;/button&gt;
+            &lt;button type=&quot;button&quot; class=&quot;crd-filter&quot; data-filter=&quot;info&quot; aria-pressed=&quot;false&quot;&gt;提示 3&lt;/button&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;crd-finding-list&quot; id=&quot;crd-finding-list&quot;&gt;&lt;/div&gt;
+        &lt;p class=&quot;crd-panel-foot&quot;&gt;判定由规则库、法务知识库与大模型语义复核共同完成，结果供法务辅助决策，最终意见以人工确认为准。&lt;/p&gt;
+      &lt;/aside&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;crd-overlay&quot; id=&quot;crd-report&quot; hidden&gt;
+      &lt;div class=&quot;crd-modal&quot; role=&quot;dialog&quot; aria-modal=&quot;true&quot; aria-labelledby=&quot;crd-report-title&quot;&gt;
+        &lt;div class=&quot;crd-modal-head&quot;&gt;
+          &lt;div&gt;
+            &lt;h3 class=&quot;crd-modal-title&quot; id=&quot;crd-report-title&quot;&gt;智能合同审核报告&lt;/h3&gt;
+            &lt;p class=&quot;crd-modal-sub&quot;&gt;设备采购合同（评审稿）.docx · 生成时间 2026-10-08 14:32 · 审查引擎 v2.1 / 规则库 v3.2&lt;/p&gt;
+          &lt;/div&gt;
+          &lt;button type=&quot;button&quot; class=&quot;crd-icon-btn&quot; id=&quot;crd-report-close&quot; aria-label=&quot;关闭报告&quot;&gt;
+            &lt;i data-lucide=&quot;x&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;
+          &lt;/button&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;crd-modal-body&quot;&gt;
+          &lt;div class=&quot;crd-verdict&quot;&gt;
+            &lt;span class=&quot;crd-verdict-badge&quot;&gt;需修订后签署&lt;/span&gt;
+            &lt;p&gt;共发现 9 项风险，其中高风险 2 项：预付款比例超限、违约责任明显不对等。建议完成修订并经法务复核后再进入签署流程。&lt;/p&gt;
+          &lt;/div&gt;
+          &lt;p class=&quot;crd-report-stats&quot;&gt;高风险 2 · 中风险 4 · 提示 3 · 已采纳 &lt;span id=&quot;crd-report-adopted&quot;&gt;0&lt;/span&gt;/9 · 条款覆盖 9/9&lt;/p&gt;
+          &lt;div&gt;
+            &lt;span class=&quot;crd-report-label&quot;&gt;重点修订建议&lt;/span&gt;
+            &lt;ol class=&quot;crd-report-list&quot;&gt;
+              &lt;li&gt;将预付款比例由 50% 降至 30%，并要求乙方提供等额预付款保函；&lt;/li&gt;
+              &lt;li&gt;对等设置违约责任，提高乙方逾期违约金上限、下调甲方解约违约金；&lt;/li&gt;
+              &lt;li&gt;量化验收标准，引用技术规格书与国家标准指标，避免“甲方要求”式表述。&lt;/li&gt;
+            &lt;/ol&gt;
+          &lt;/div&gt;
+          &lt;p class=&quot;crd-report-note&quot;&gt;演示环境：报告内容由模拟合同与模拟规则库生成，仅用于方案演示。&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;crd-modal-foot&quot;&gt;
+          &lt;button type=&quot;button&quot; class=&quot;crd-btn&quot; id=&quot;crd-export-pdf&quot;&gt;导出 PDF&lt;/button&gt;
+          &lt;button type=&quot;button&quot; class=&quot;crd-btn crd-btn--primary&quot; id=&quot;crd-export-word&quot;&gt;导出 Word&lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;p class=&quot;crd-toast&quot; id=&quot;crd-toast&quot; role=&quot;status&quot; hidden&gt;&lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;script&gt;
+    (function () {
+      &quot;use strict&quot;;
+      var root = document.getElementById(&quot;crd&quot;);
+      if (!root) {
+        return;
+      }
+
+      var SEV = {
+        high: { label: &quot;高风险&quot; },
+        mid: { label: &quot;中风险&quot; },
+        info: { label: &quot;提示&quot; }
+      };
+
+      var findings = [
+        {
+          id: &quot;f1&quot;,
+          sev: &quot;high&quot;,
+          clause: 2,
+          source: &quot;规则库命中&quot;,
+          title: &quot;预付款比例超限且无履约担保&quot;,
+          quote: &quot;“合同签订后 7 个工作日内……支付合同总额 50% 的预付款”&quot;,
+          desc: &quot;预付款比例达到合同总额的 50%，超过集团制度规定的 30% 上限，且未要求乙方提供履约担保或预付款保函，资金占用与履约风险较高。&quot;,
+          basis: &quot;《集团合同管理办法》第 18 条：采购类合同预付款原则上不超过合同金额的 30%；确需超出的，应经分管领导审批并要求提供等额担保。&quot;,
+          suggestion: &quot;预付款调整为合同总额的 30%，乙方同步提供等额预付款保函；设备验收合格后 30 日内支付至合同总额的 95%，剩余 5% 作为质保金，于质保期满且无遗留问题后支付。&quot;
+        },
+        {
+          id: &quot;f2&quot;,
+          sev: &quot;high&quot;,
+          clause: 4,
+          source: &quot;语义审查&quot;,
+          title: &quot;违约责任权责不对等&quot;,
+          quote: &quot;“甲方解约违约金 30% vs 乙方逾期违约金累计上限 5%”&quot;,
+          desc: &quot;甲方单方解除的违约金高达合同总额的 30%，而乙方逾期交付违约金累计上限仅为 5%，双方责任明显失衡，整体条款明显偏向乙方。&quot;,
+          basis: &quot;法务知识库 · 案例 FSC-2024-073（违约责任不对等被法院调整）；《民法典》第 585 条关于违约金过高可请求调整的规定。&quot;,
+          suggestion: &quot;乙方逾期交付违约金累计上限提高至合同总额的 20%，并赔偿由此造成的实际损失；甲方无正当理由解除合同的违约金调整为合同总额的 10%，或按乙方实际损失据实赔偿。&quot;
+        },
+        {
+          id: &quot;f3&quot;,
+          sev: &quot;mid&quot;,
+          clause: 3,
+          source: &quot;规则库命中&quot;,
+          title: &quot;验收标准表述模糊&quot;,
+          quote: &quot;“设备应符合甲方要求的标准”&quot;,
+          desc: &quot;“符合甲方要求的标准”缺乏可量化、可验证的验收依据，实操中易产生争议，也不利于验收付款节点的认定。&quot;,
+          basis: &quot;法务知识库 · 案例 FSC-2024-073（验收标准约定不明引发争议）；集团《采购合同示范文本》验收条款指引。&quot;,
+          suggestion: &quot;设备应符合附件《技术规格书》及国家、行业相关标准（如 GB/T 相关标准），并满足连续 72 小时稳定运行、分拣准确率不低于 99.5% 等量化指标；验收流程与整改期限以附件为准。&quot;
+        },
+        {
+          id: &quot;f4&quot;,
+          sev: &quot;mid&quot;,
+          clause: 5,
+          source: &quot;语义审查&quot;,
+          title: &quot;定制成果知识产权归乙方&quot;,
+          quote: &quot;“软件、技术文档、图纸等成果知识产权均归乙方所有”&quot;,
+          desc: &quot;乙方为履行合同开发的软件、文档等成果知识产权全部归乙方，甲方仅获非独占使用权，后续二次开发或更换供应商可能受制于乙方。&quot;,
+          basis: &quot;集团《知识产权管理办法》第 12 条：委托开发成果原则上应约定归集团所有，或由集团享有独占许可。&quot;,
+          suggestion: &quot;乙方为履行本合同专门开发、定制形成的软件与文档，知识产权归甲方所有；乙方原有技术成果授予甲方永久、免费、可转授权的使用许可。&quot;
+        },
+        {
+          id: &quot;f5&quot;,
+          sev: &quot;mid&quot;,
+          clause: 6,
+          source: &quot;语义审查&quot;,
+          title: &quot;保密条款缺少例外情形&quot;,
+          quote: &quot;“保密期限为永久有效，未约定例外情形”&quot;,
+          desc: &quot;保密期限约定为“永久有效”，且未列明法定披露、已公开信息等例外情形，条款可执行性不足，存在被认定约定不明的风险。&quot;,
+          basis: &quot;《民法典》第 501 条商业秘密保密义务；集团《商业秘密保护指引》第 7 条关于保密期限与例外情形的规定。&quot;,
+          suggestion: &quot;保密期限调整为合同终止后 5 年（涉商业秘密可约定长期有效），并增加例外情形：信息已进入公有领域、依法律法规或监管要求披露、经披露方书面同意等。&quot;
+        },
+        {
+          id: &quot;f6&quot;,
+          sev: &quot;mid&quot;,
+          clause: 8,
+          source: &quot;规则库命中&quot;,
+          title: &quot;争议解决约定对方所在地管辖&quot;,
+          quote: &quot;“提交乙方所在地仲裁委员会仲裁”&quot;,
+          desc: &quot;约定由乙方所在地仲裁机构管辖，一旦发生争议集团需异地应诉，维权成本与结果不确定性明显增加。&quot;,
+          basis: &quot;《集团合同管理办法》第 26 条：争议解决条款应优先约定集团住所地法院或仲裁机构。&quot;,
+          suggestion: &quot;因本合同引起的争议，双方应友好协商解决；协商不成的，提交上海仲裁委员会按其届时有效的仲裁规则仲裁，仲裁裁决为终局裁决。&quot;
+        },
+        {
+          id: &quot;f7&quot;,
+          sev: &quot;info&quot;,
+          clause: 9,
+          source: &quot;规则库命中&quot;,
+          title: &quot;自动续约缺乏退出机制&quot;,
+          quote: &quot;“双方均未提出异议的，自动续约一年”&quot;,
+          desc: &quot;合同期满未提出异议即自动续约且价格不变，可能形成长期锁定，缺少价格复核与退出安排。&quot;,
+          basis: &quot;集团《采购管理办法》第 22 条：长期合同应设置价格调整与年度评审机制。&quot;,
+          suggestion: &quot;删去自动续约条款，或约定续约需双方书面确认，且续约前完成价格复核与供应商履约评价；任一方可提前 60 日书面通知不再续约。&quot;
+        },
+        {
+          id: &quot;f8&quot;,
+          sev: &quot;info&quot;,
+          clause: 2,
+          source: &quot;规则库命中&quot;,
+          title: &quot;预付款后即开具全额发票&quot;,
+          quote: &quot;“收到预付款后即开具合同全额发票”&quot;,
+          desc: &quot;乙方于预付款到账后即开具全额发票，若合同提前终止或金额调整，将产生发票红冲与税款占用的操作成本。&quot;,
+          basis: &quot;集团《财务报销与发票管理办法》第 9 条：发票开具应与实际结算进度匹配。&quot;,
+          suggestion: &quot;发票按实际结算进度分批开具：预付款到账后开具 30% 金额的发票，验收合格并支付尾款后开具剩余金额发票。&quot;
+        },
+        {
+          id: &quot;f9&quot;,
+          sev: &quot;info&quot;,
+          clause: 6,
+          source: &quot;语义审查&quot;,
+          title: &quot;数据回传缺少安全约定&quot;,
+          quote: &quot;“运行数据由乙方采集并回传至乙方云平台”&quot;,
+          desc: &quot;设备运行数据回传至乙方云平台，但未约定数据权属、存储位置、安全保护与个人信息保护措施，存在数据合规风险。&quot;,
+          basis: &quot;《数据安全法》第 27 条数据安全保护义务；集团《数据安全管理办法（试行）》第 5 条关于数据权属与处理范围的规定。&quot;,
+          suggestion: &quot;增加数据安全条款：设备运行数据权属归甲方，乙方仅在运维必要范围内处理并采取加密、访问控制等措施；涉及个人信息时，双方另行签署数据处理协议。&quot;
+        }
+      ];
+
+      var state = { openId: &quot;f1&quot;, filter: &quot;all&quot;, adopted: {}, scanning: false };
+      var listEl = root.querySelector(&quot;#crd-finding-list&quot;);
+      var countEl = root.querySelector(&quot;#crd-count&quot;);
+      var adoptedEl = root.querySelector(&quot;#crd-adopted&quot;);
+      var locateEl = root.querySelector(&quot;#crd-locate&quot;);
+      var toastEl = root.querySelector(&quot;#crd-toast&quot;);
+      var scanEl = root.querySelector(&quot;#crd-scan&quot;);
+      var scanFill = root.querySelector(&quot;#crd-scan-fill&quot;);
+      var scanLabel = root.querySelector(&quot;#crd-scan-label&quot;);
+      var overlay = root.querySelector(&quot;#crd-report&quot;);
+      var reportAdoptedEl = root.querySelector(&quot;#crd-report-adopted&quot;);
+      var cards = {};
+      var toastTimer = null;
+      var lastFocus = null;
+
+      function esc(value) {
+        return String(value).replace(/[&amp;&lt;&gt;&quot;]/g, function (ch) {
+          return { &quot;&amp;&quot;: &quot;&amp;amp;&quot;, &quot;&lt;&quot;: &quot;&amp;lt;&quot;, &quot;&gt;&quot;: &quot;&amp;gt;&quot;, &#x27;&quot;&#x27;: &quot;&amp;quot;&quot; }[ch];
+        });
+      }
+
+      function cardHTML(f) {
+        return (
+          &#x27;&lt;article class=&quot;crd-finding&quot; data-id=&quot;&#x27; + f.id + &#x27;&quot; data-sev=&quot;&#x27; + f.sev + &#x27;&quot;&gt;&#x27; +
+            &#x27;&lt;button type=&quot;button&quot; class=&quot;crd-finding-head&quot; aria-expanded=&quot;false&quot; aria-controls=&quot;crd-detail-&#x27; + f.id + &#x27;&quot;&gt;&#x27; +
+              &#x27;&lt;span class=&quot;crd-row1&quot;&gt;&#x27; +
+                &#x27;&lt;span class=&quot;crd-sev crd-sev--&#x27; + f.sev + &#x27;&quot;&gt;&#x27; + SEV[f.sev].label + &quot;&lt;/span&gt;&quot; +
+                &#x27;&lt;span class=&quot;crd-finding-title&quot;&gt;&#x27; + esc(f.title) + &quot;&lt;/span&gt;&quot; +
+                &#x27;&lt;span class=&quot;crd-adopted-tag&quot; hidden&gt;已采纳&lt;/span&gt;&#x27; +
+                &#x27;&lt;span class=&quot;crd-finding-loc&quot;&gt;第 &#x27; + f.clause + &quot; 条&lt;/span&gt;&quot; +
+              &quot;&lt;/span&gt;&quot; +
+              &#x27;&lt;span class=&quot;crd-row2&quot;&gt;&#x27; +
+                &#x27;&lt;span class=&quot;crd-src&quot;&gt;&#x27; + esc(f.source) + &quot;&lt;/span&gt;&quot; +
+                &#x27;&lt;span class=&quot;crd-quote&quot;&gt;&#x27; + esc(f.quote) + &quot;&lt;/span&gt;&quot; +
+              &quot;&lt;/span&gt;&quot; +
+            &quot;&lt;/button&gt;&quot; +
+            &#x27;&lt;div class=&quot;crd-finding-detail&quot; id=&quot;crd-detail-&#x27; + f.id + &#x27;&quot; hidden&gt;&#x27; +
+              &#x27;&lt;p class=&quot;crd-desc&quot;&gt;&#x27; + esc(f.desc) + &quot;&lt;/p&gt;&quot; +
+              &#x27;&lt;div class=&quot;crd-basis&quot;&gt;&lt;span class=&quot;crd-basis-label&quot;&gt;判定依据&lt;/span&gt;&lt;p&gt;&#x27; + esc(f.basis) + &quot;&lt;/p&gt;&lt;/div&gt;&quot; +
+              &#x27;&lt;div class=&quot;crd-suggest&quot;&gt;&#x27; +
+                &#x27;&lt;div class=&quot;crd-suggest-head&quot;&gt;&lt;span&gt;建议修改&lt;/span&gt;&#x27; +
+                &#x27;&lt;button type=&quot;button&quot; class=&quot;crd-adopt&quot; data-adopt=&quot;&#x27; + f.id + &#x27;&quot; aria-pressed=&quot;false&quot;&gt;采纳建议&lt;/button&gt;&lt;/div&gt;&#x27; +
+                &#x27;&lt;p class=&quot;crd-suggest-text&quot;&gt;&#x27; + esc(f.suggestion) + &quot;&lt;/p&gt;&quot; +
+              &quot;&lt;/div&gt;&quot; +
+            &quot;&lt;/div&gt;&quot; +
+          &quot;&lt;/article&gt;&quot;
+        );
+      }
+
+      findings.forEach(function (f) {
+        listEl.insertAdjacentHTML(&quot;beforeend&quot;, cardHTML(f));
+      });
+      findings.forEach(function (f) {
+        cards[f.id] = listEl.querySelector(&#x27;[data-id=&quot;&#x27; + f.id + &#x27;&quot;]&#x27;);
+      });
+
+      function clauseFindings(n) {
+        return findings.filter(function (f) {
+          return f.clause === n;
+        });
+      }
+
+      function adoptedCount() {
+        return findings.filter(function (f) {
+          return state.adopted[f.id];
+        }).length;
+      }
+
+      function paintClauseStatus() {
+        root.querySelectorAll(&quot;[data-clause-status]&quot;).forEach(function (chip) {
+          var n = Number(chip.getAttribute(&quot;data-clause-status&quot;));
+          var list = clauseFindings(n);
+          if (!list.length) {
+            return;
+          }
+          var adopted = list.filter(function (f) {
+            return state.adopted[f.id];
+          }).length;
+          var worst = list.some(function (f) {
+            return f.sev === &quot;high&quot;;
+          }) ? &quot;high&quot; : list.some(function (f) {
+            return f.sev === &quot;mid&quot;;
+          }) ? &quot;mid&quot; : &quot;info&quot;;
+          chip.className = &quot;crd-chip crd-chip--&quot; + worst;
+          chip.textContent = &quot;命中 &quot; + list.length + &quot; 项&quot; + (adopted ? &quot; · 已采纳 &quot; + adopted : &quot;&quot;);
+        });
+      }
+
+      function openFinding(id) {
+        state.openId = id;
+        var target = null;
+        findings.forEach(function (f) {
+          if (f.id === id) {
+            target = f;
+          }
+          var card = cards[f.id];
+          var head = card.querySelector(&quot;.crd-finding-head&quot;);
+          var detail = card.querySelector(&quot;.crd-finding-detail&quot;);
+          var open = f.id === id;
+          head.setAttribute(&quot;aria-expanded&quot;, open ? &quot;true&quot; : &quot;false&quot;);
+          detail.hidden = !open;
+          card.classList.toggle(&quot;is-open&quot;, open);
+        });
+        root.querySelectorAll(&quot;.crd-finding&quot;).forEach(function (card) {
+          card.classList.toggle(&quot;is-active&quot;, card.getAttribute(&quot;data-id&quot;) === id);
+        });
+        root.querySelectorAll(&quot;.crd-mark&quot;).forEach(function (mark) {
+          mark.classList.toggle(&quot;is-active&quot;, mark.getAttribute(&quot;data-finding&quot;) === id);
+        });
+        root.querySelectorAll(&quot;.crd-clause&quot;).forEach(function (clause) {
+          clause.classList.remove(&quot;is-active&quot;);
+        });
+        if (target) {
+          var clauseEl = root.querySelector(&#x27;.crd-clause[data-clause=&quot;&#x27; + target.clause + &#x27;&quot;]&#x27;);
+          if (clauseEl) {
+            clauseEl.classList.add(&quot;is-active&quot;);
+          }
+          locateEl.classList.add(&quot;is-hit&quot;);
+          locateEl.innerHTML = &#x27;&lt;span&gt;已定位：第 &#x27; + target.clause + &quot; 条 · &quot; + esc(target.title) + &quot;&lt;/span&gt;&quot;;
+        }
+      }
+
+      function toast(message, anchor) {
+        toastEl.textContent = message;
+        toastEl.hidden = false;
+        toastEl.style.top = &quot;&quot;;
+        toastEl.style.bottom = &quot;&quot;;
+        toastEl.style.left = &quot;&quot;;
+        toastEl.style.transform = &quot;&quot;;
+        if (anchor) {
+          var win = root.querySelector(&quot;.crd-window&quot;);
+          if (win) {
+            var winRect = win.getBoundingClientRect();
+            var anchorRect = anchor.getBoundingClientRect();
+            var left = anchorRect.left - winRect.left + anchorRect.width / 2;
+            var top = anchorRect.bottom - winRect.top + 8;
+            toastEl.style.top = top + &quot;px&quot;;
+            toastEl.style.bottom = &quot;auto&quot;;
+            toastEl.style.left = left + &quot;px&quot;;
+            toastEl.style.transform = &quot;translateX(-50%)&quot;;
+            var width = toastEl.offsetWidth;
+            var minLeft = width / 2 + 8;
+            var maxLeft = winRect.width - width / 2 - 8;
+            if (maxLeft &gt; minLeft) {
+              left = Math.min(Math.max(left, minLeft), maxLeft);
+              toastEl.style.left = left + &quot;px&quot;;
+            }
+          }
+        } else {
+          toastEl.style.bottom = &quot;16px&quot;;
+          toastEl.style.left = &quot;50%&quot;;
+          toastEl.style.transform = &quot;translateX(-50%)&quot;;
+        }
+        if (toastTimer) {
+          window.clearTimeout(toastTimer);
+        }
+        toastTimer = window.setTimeout(function () {
+          toastEl.hidden = true;
+        }, 3000);
+      }
+
+      function toggleAdopt(id, btn) {
+        var on = !state.adopted[id];
+        state.adopted[id] = on;
+        var card = cards[id];
+        card.classList.toggle(&quot;is-adopted&quot;, on);
+        var tag = card.querySelector(&quot;.crd-adopted-tag&quot;);
+        if (tag) {
+          tag.hidden = !on;
+        }
+        btn.textContent = on ? &quot;已采纳&quot; : &quot;采纳建议&quot;;
+        btn.setAttribute(&quot;aria-pressed&quot;, on ? &quot;true&quot; : &quot;false&quot;);
+        adoptedEl.textContent = adoptedCount() + &quot; / &quot; + findings.length;
+        reportAdoptedEl.textContent = String(adoptedCount());
+        root.querySelectorAll(&#x27;.crd-mark[data-finding=&quot;&#x27; + id + &#x27;&quot;]&#x27;).forEach(function (mark) {
+          mark.classList.toggle(&quot;is-adopted&quot;, on);
+        });
+        paintClauseStatus();
+        toast(on ? &quot;已采纳建议：修订意见将写入审查报告&quot; : &quot;已撤销采纳&quot;, btn);
+      }
+
+      listEl.addEventListener(&quot;click&quot;, function (event) {
+        var adoptBtn = event.target.closest(&quot;[data-adopt]&quot;);
+        if (adoptBtn) {
+          toggleAdopt(adoptBtn.getAttribute(&quot;data-adopt&quot;), adoptBtn);
+          return;
+        }
+        var head = event.target.closest(&quot;.crd-finding-head&quot;);
+        if (head) {
+          var card = head.closest(&quot;.crd-finding&quot;);
+          openFinding(card.getAttribute(&quot;data-id&quot;));
+        }
+      });
+
+      root.querySelector(&quot;.crd-doc-body&quot;).addEventListener(&quot;click&quot;, function (event) {
+        var mark = event.target.closest(&quot;.crd-mark&quot;);
+        if (mark) {
+          openFinding(mark.getAttribute(&quot;data-finding&quot;));
+        }
+      });
+
+      var filterBtns = Array.prototype.slice.call(root.querySelectorAll(&quot;.crd-filter&quot;));
+      filterBtns.forEach(function (btn) {
+        btn.addEventListener(&quot;click&quot;, function () {
+          state.filter = btn.getAttribute(&quot;data-filter&quot;);
+          filterBtns.forEach(function (other) {
+            other.setAttribute(&quot;aria-pressed&quot;, other === btn ? &quot;true&quot; : &quot;false&quot;);
+          });
+          var shown = 0;
+          findings.forEach(function (f) {
+            var visible = state.filter === &quot;all&quot; || f.sev === state.filter;
+            cards[f.id].hidden = !visible;
+            if (visible) {
+              shown += 1;
+            }
+          });
+          countEl.textContent = &quot;显示 &quot; + shown + &quot; / &quot; + findings.length;
+        });
+      });
+
+      root.querySelectorAll(&quot;.crd-nav-item&quot;).forEach(function (item) {
+        item.addEventListener(&quot;click&quot;, function () {
+          if (!item.classList.contains(&quot;is-active&quot;)) {
+            var labelEl = item.querySelector(&quot;span&quot;);
+            var label = labelEl ? labelEl.textContent : &quot;该模块&quot;;
+            toast(&quot;「&quot; + label + &quot;」为 M1 演示版规划模块，当前仅开放「审查工作台」&quot;, item);
+          }
+        });
+      });
+
+      var rescanBtn = root.querySelector(&quot;#crd-rescan&quot;);
+      rescanBtn.addEventListener(&quot;click&quot;, function () {
+        if (state.scanning) {
+          return;
+        }
+        state.scanning = true;
+        rescanBtn.disabled = true;
+        scanEl.hidden = false;
+        var stages = [&quot;解析合同文本&quot;, &quot;切分条款结构&quot;, &quot;匹配规则库与法务知识库&quot;, &quot;大模型语义复核&quot;, &quot;生成审查意见&quot;];
+        var reduce = window.matchMedia &amp;&amp; window.matchMedia(&quot;(prefers-reduced-motion: reduce)&quot;).matches;
+        var wait = reduce ? 90 : 400;
+        var i = 0;
+        function step() {
+          if (i &lt; stages.length) {
+            scanLabel.textContent = stages[i] + &quot;…&quot;;
+            scanFill.style.width = Math.round(((i + 1) / stages.length) * 100) + &quot;%&quot;;
+            i += 1;
+            window.setTimeout(step, wait);
+            return;
+          }
+          scanEl.hidden = true;
+          scanFill.style.width = &quot;0%&quot;;
+          state.scanning = false;
+          rescanBtn.disabled = false;
+          root.querySelector(&quot;#crd-time&quot;).textContent = &quot;38 秒&quot;;
+          root.querySelector(&quot;#crd-time-note&quot;).textContent = &quot;较人工预审提效约 96%&quot;;
+          toast(&quot;复核完成：命中 9 项风险（高风险 2 项），用时 38 秒&quot;, rescanBtn);
+        }
+        step();
+      });
+
+      function openReport() {
+        lastFocus = document.activeElement;
+        reportAdoptedEl.textContent = String(adoptedCount());
+        overlay.hidden = false;
+        var closeBtn = root.querySelector(&quot;#crd-report-close&quot;);
+        if (closeBtn) {
+          closeBtn.focus();
+        }
+      }
+
+      function closeReport() {
+        overlay.hidden = true;
+        if (lastFocus &amp;&amp; lastFocus.focus) {
+          lastFocus.focus();
+        }
+      }
+
+      root.querySelector(&quot;#crd-report-btn&quot;).addEventListener(&quot;click&quot;, openReport);
+      root.querySelector(&quot;#crd-report-close&quot;).addEventListener(&quot;click&quot;, closeReport);
+      overlay.addEventListener(&quot;click&quot;, function (event) {
+        if (event.target === overlay) {
+          closeReport();
+        }
+      });
+      document.addEventListener(&quot;keydown&quot;, function (event) {
+        if (event.key === &quot;Escape&quot; &amp;&amp; !overlay.hidden) {
+          closeReport();
+        }
+      });
+      var exportWordBtn = root.querySelector(&quot;#crd-export-word&quot;);
+      var exportPdfBtn = root.querySelector(&quot;#crd-export-pdf&quot;);
+      exportWordBtn.addEventListener(&quot;click&quot;, function () {
+        toast(&quot;演示环境：已生成《智能合同审核报告》Word 版（模拟导出）&quot;, exportWordBtn);
+      });
+      exportPdfBtn.addEventListener(&quot;click&quot;, function () {
+        toast(&quot;演示环境：已生成《智能合同审核报告》PDF 版（模拟导出）&quot;, exportPdfBtn);
+      });
+
+      paintClauseStatus();
+      openFinding(state.openId);
+
+      if (window.lucide &amp;&amp; typeof window.lucide.createIcons === &quot;function&quot;) {
+        try {
+          window.lucide.createIcons({ attrs: { width: 16, height: 16 } });
+        } catch (error) {
+          /* icons are decorative only */
+        }
+      }
+    })();
+  &lt;/script&gt;
+&lt;/div&gt;
+
+&lt;script src=&quot;https://unpkg.com/@floating-ui/core@1.7.3/dist/floating-ui.core.umd.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://unpkg.com/@floating-ui/dom@1.7.4/dist/floating-ui.dom.umd.min.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+(() =&gt; {
+  if (window.FloatingUIDOM == null) {
+    return;
+  }
+  const { autoUpdate, computePosition, flip, offset, shift, size } =
+    window.FloatingUIDOM;
+  const tooltipPlacements = new Set([&quot;top&quot;, &quot;right&quot;, &quot;bottom&quot;, &quot;left&quot;]);
+  const tooltipId = `codex-visualization-tooltip-${
+    window.crypto?.randomUUID?.() ?? Date.now().toString(36)
+  }`;
+  const tooltipGap = 5;
+  const hoverDelay = 700;
+  const skipDelay = 300;
+  let activeTrigger = null;
+  let pendingTrigger = null;
+  let tooltip = null;
+  let openTimeout = null;
+  let autoUpdateCleanup = null;
+  let positionRequest = 0;
+  let skipDelayUntil = 0;
+  let lastPointerWasTouch = false;
+  let pinnedByTouch = false;
+
+  const getTrigger = (event) =&gt; {
+    for (const target of event.composedPath()) {
+      if (target?.nodeType === Node.ELEMENT_NODE) {
+        const trigger = target.closest(&quot;[data-tooltip]&quot;);
+        if (trigger) return trigger;
+      }
+    }
+    return null;
+  };
+  const containsTarget = (trigger, target) =&gt;
+    target?.nodeType != null &amp;&amp; trigger.contains(target);
+  const getContent = (trigger) =&gt;
+    trigger.getAttribute(&quot;data-tooltip&quot;)?.trim() ?? &quot;&quot;;
+  const getPlacement = (trigger) =&gt; {
+    const placement = trigger.getAttribute(&quot;data-tooltip-placement&quot;);
+    return tooltipPlacements.has(placement) ? placement : &quot;top&quot;;
+  };
+  const getTooltip = () =&gt; {
+    if (tooltip == null) {
+      tooltip = document.createElement(&quot;div&quot;);
+      tooltip.id = tooltipId;
+      tooltip.className = &quot;tooltip&quot;;
+      tooltip.setAttribute(&quot;role&quot;, &quot;tooltip&quot;);
+    }
+    return tooltip;
+  };
+  const setDescribedBy = (trigger, described) =&gt; {
+    const ids = new Set(
+      (trigger.getAttribute(&quot;aria-describedby&quot;) ?? &quot;&quot;)
+        .split(/\s+/)
+        .filter(Boolean),
+    );
+    if (described) {
+      ids.add(tooltipId);
+    } else {
+      ids.delete(tooltipId);
+    }
+    if (ids.size === 0) {
+      trigger.removeAttribute(&quot;aria-describedby&quot;);
+    } else {
+      trigger.setAttribute(&quot;aria-describedby&quot;, [...ids].join(&quot; &quot;));
+    }
+  };
+  const clearOpenTimeout = () =&gt; {
+    if (openTimeout != null) {
+      window.clearTimeout(openTimeout);
+      openTimeout = null;
+    }
+    pendingTrigger = null;
+  };
+  const closeTooltip = (activateSkipDelay = true) =&gt; {
+    clearOpenTimeout();
+    pinnedByTouch = false;
+    positionRequest += 1;
+    autoUpdateCleanup?.();
+    autoUpdateCleanup = null;
+    if (activeTrigger == null) {
+      return;
+    }
+    setDescribedBy(activeTrigger, false);
+    activeTrigger = null;
+    tooltip?.remove();
+    if (activateSkipDelay) {
+      skipDelayUntil = Date.now() + skipDelay;
+    }
+  };
+  const updatePosition = (trigger, floating) =&gt; {
+    const request = ++positionRequest;
+    void computePosition(trigger, floating, {
+      middleware: [
+        offset(tooltipGap),
+        flip({ padding: tooltipGap }),
+        shift({ padding: tooltipGap }),
+        size({
+          padding: tooltipGap,
+          apply({ availableHeight, availableWidth, elements }) {
+            elements.floating.style.setProperty(
+              &quot;--tooltip-available-width&quot;,
+              `${Math.max(0, availableWidth)}px`,
+            );
+            elements.floating.style.setProperty(
+              &quot;--tooltip-available-height&quot;,
+              `${Math.max(0, availableHeight)}px`,
+            );
+          },
+        }),
+      ],
+      placement: getPlacement(trigger),
+      strategy: &quot;fixed&quot;,
+    })
+      .then(({ x, y }) =&gt; {
+        if (activeTrigger !== trigger || request !== positionRequest) {
+          return;
+        }
+        const scale = window.devicePixelRatio || 1;
+        floating.style.transform = `translate(${Math.round(x * scale) / scale}px, ${Math.round(y * scale) / scale}px)`;
+        floating.style.visibility = &quot;visible&quot;;
+      })
+      .catch(() =&gt; {
+        if (activeTrigger === trigger &amp;&amp; request === positionRequest) {
+          closeTooltip(false);
+        }
+      });
+  };
+  const openTooltip = (trigger) =&gt; {
+    const content = getContent(trigger);
+    if (!trigger.isConnected || content.length === 0) {
+      return;
+    }
+    clearOpenTimeout();
+    if (activeTrigger === trigger) {
+      return;
+    }
+    closeTooltip();
+    const floating = getTooltip();
+    floating.textContent = content;
+    floating.style.visibility = &quot;hidden&quot;;
+    floating.style.transform = &quot;translate(0, 0)&quot;;
+    document.body.appendChild(floating);
+    activeTrigger = trigger;
+    setDescribedBy(trigger, true);
+    autoUpdateCleanup = autoUpdate(trigger, floating, () =&gt; {
+      updatePosition(trigger, floating);
+    });
+  };
+  const requestOpen = (trigger, immediate = false) =&gt; {
+    if (
+      getContent(trigger).length === 0 ||
+      activeTrigger === trigger ||
+      pendingTrigger === trigger
+    ) {
+      return;
+    }
+    clearOpenTimeout();
+    pendingTrigger = trigger;
+    const delay =
+      immediate || activeTrigger != null || Date.now() &lt; skipDelayUntil
+        ? 0
+        : hoverDelay;
+    if (delay === 0) {
+      openTooltip(trigger);
+      return;
+    }
+    openTimeout = window.setTimeout(() =&gt; {
+      openTimeout = null;
+      pendingTrigger = null;
+      openTooltip(trigger);
+    }, delay);
+  };
+  const handlePointerOpen = (event) =&gt; {
+    if (event.pointerType === &quot;touch&quot;) {
+      return;
+    }
+    const trigger = getTrigger(event);
+    if (trigger == null || containsTarget(trigger, event.relatedTarget)) {
+      return;
+    }
+    requestOpen(trigger);
+  };
+  const handlePointer = (event) =&gt; {
+    lastPointerWasTouch =
+      event.type === &quot;pointerdown&quot; &amp;&amp; event.pointerType === &quot;touch&quot;;
+  };
+  const handleTouchClick = (event) =&gt; {
+    const isTouch = event.pointerType === &quot;touch&quot; || lastPointerWasTouch;
+    lastPointerWasTouch = false;
+    if (!isTouch || event.detail === 0) {
+      return;
+    }
+    const trigger = getTrigger(event);
+    if (
+      trigger == null ||
+      !trigger.isConnected ||
+      getContent(trigger).length === 0 ||
+      (pinnedByTouch &amp;&amp; activeTrigger === trigger)
+    ) {
+      if (pinnedByTouch) {
+        closeTooltip();
+      }
+      return;
+    }
+    openTooltip(trigger);
+    pinnedByTouch = activeTrigger === trigger;
+    window.setTimeout(() =&gt; {
+      if (activeTrigger === trigger &amp;&amp; !trigger.isConnected) {
+        closeTooltip(false);
+      }
+    }, 0);
+  };
+  const handleLeave = (event) =&gt; {
+    if (pinnedByTouch) {
+      return;
+    }
+    const trigger = getTrigger(event);
+    if (trigger == null || containsTarget(trigger, event.relatedTarget)) {
+      return;
+    }
+    if (activeTrigger === trigger || pendingTrigger === trigger) {
+      closeTooltip();
+    }
+  };
+  const handleFocusIn = (event) =&gt; {
+    const trigger = getTrigger(event);
+    if (trigger?.matches(&quot;:focus-visible&quot;)) {
+      requestOpen(trigger, true);
+    }
+  };
+  const handleKeyDown = (event) =&gt; {
+    if (event.key === &quot;Escape&quot;) {
+      closeTooltip();
+    }
+  };
+  const handleContextMenu = (event) =&gt; {
+    lastPointerWasTouch = false;
+    const trigger = getTrigger(event);
+    if (activeTrigger === trigger || pendingTrigger === trigger) {
+      closeTooltip();
+    }
+  };
+  const handlers = {
+    pointerover: handlePointerOpen,
+    pointerdown: handlePointer,
+    pointercancel: handlePointer,
+    click: handleTouchClick,
+    pointerout: handleLeave,
+    focusin: handleFocusIn,
+    focusout: handleLeave,
+    keydown: handleKeyDown,
+    contextmenu: handleContextMenu,
+  };
+  const roots = new Map();
+  const handledEvents = new WeakSet();
+  const handleEvent = (event) =&gt; {
+    if (handledEvents.has(event)) return;
+    handledEvents.add(event);
+    handlers[event.type](event);
+  };
+  const discoverRoots = (node) =&gt; {
+    if (node.shadowRoot) listen(node.shadowRoot);
+    for (const element of node.querySelectorAll(&quot;*&quot;)) {
+      if (element.shadowRoot) listen(element.shadowRoot);
+    }
+  };
+  const listen = (root) =&gt; {
+    if (roots.has(root)) return;
+    for (const type of Object.keys(handlers)) root.addEventListener(type, handleEvent);
+    const observer = new window.MutationObserver((records) =&gt; {
+      for (const { addedNodes } of records) {
+        for (const node of addedNodes) {
+          if (node.nodeType === Node.ELEMENT_NODE) discoverRoots(node);
+        }
+      }
+      for (const [root, cleanup] of roots) {
+        if (root.host &amp;&amp; !root.host.isConnected) {
+          cleanup();
+          roots.delete(root);
+        }
+      }
+      if (activeTrigger &amp;&amp; !activeTrigger.isConnected) closeTooltip(false);
+    });
+    observer.observe(root, { childList: true, subtree: true });
+    roots.set(root, () =&gt; {
+      observer.disconnect();
+      for (const type of Object.keys(handlers)) root.removeEventListener(type, handleEvent);
+    });
+    discoverRoots(root);
+  };
+  const destroy = () =&gt; {
+    closeTooltip(false);
+    lastPointerWasTouch = false;
+    for (const cleanup of roots.values()) cleanup();
+    roots.clear();
+    tooltip = null;
+  };
+
+  // Events between children of one shadow root never reach the document.
+  listen(document);
+  window.addEventListener(&quot;pagehide&quot;, destroy, { once: true });
+})();
+&lt;/script&gt;
+&lt;script id=&quot;codex-visualization-tabs&quot;&gt;
+(() =&gt; {
+  const selector = &#x27;.nav[role=&quot;tablist&quot;] [role=&quot;tab&quot;]&#x27;;
+  const disabled = &#x27;:disabled,[aria-disabled=&quot;true&quot;]&#x27;;
+  const selectTab = (selected) =&gt; {
+    const panelId = selected.getAttribute(&quot;aria-controls&quot;);
+    for (const tab of selected.closest(&#x27;[role=&quot;tablist&quot;]&#x27;).querySelectorAll(&#x27;[role=&quot;tab&quot;]&#x27;)) {
+      const active = tab === selected;
+      tab.classList.toggle(&quot;active&quot;, active);
+      tab.setAttribute(&quot;aria-selected&quot;, String(active));
+      const id = tab.getAttribute(&quot;aria-controls&quot;);
+      const panel = id &amp;&amp; document.getElementById(id);
+      if (panel != null) {
+        panel.hidden = id !== panelId;
+        if (!panel.hidden &amp;&amp; selected.id) {
+          panel.setAttribute(&quot;aria-labelledby&quot;, selected.id);
+        }
+      }
+    }
+  };
+  const interact = (event) =&gt; {
+    const tab = event.target?.closest?.(selector);
+    if (event.defaultPrevented || tab == null || tab.matches(disabled)) {
+      return;
+    }
+    if (event.type === &quot;click&quot;) {
+      selectTab(tab);
+      return;
+    }
+    const tabs = Array.from(
+      tab.closest(&#x27;[role=&quot;tablist&quot;]&#x27;).querySelectorAll(&#x27;[role=&quot;tab&quot;]&#x27;),
+    ).filter((candidate) =&gt; !candidate.matches(disabled));
+    const current = tabs.indexOf(tab);
+    let next;
+    if (event.key === &quot;ArrowRight&quot; || event.key === &quot;ArrowDown&quot;) {
+      next = (current + 1) % tabs.length;
+    } else if (event.key === &quot;ArrowLeft&quot; || event.key === &quot;ArrowUp&quot;) {
+      next = (current + tabs.length - 1) % tabs.length;
+    } else if (event.key === &quot;Home&quot;) {
+      next = 0;
+    } else if (event.key === &quot;End&quot;) {
+      next = tabs.length - 1;
+    } else {
+      return;
+    }
+    event.preventDefault();
+    tabs[next].focus();
+    selectTab(tabs[next]);
+  };
+
+  for (const list of document.querySelectorAll(&#x27;.nav[role=&quot;tablist&quot;]&#x27;)) {
+    const selected =
+      list.querySelector(&#x27;[role=&quot;tab&quot;][aria-selected=&quot;true&quot;]&#x27;) ??
+      list.querySelector(&#x27;[role=&quot;tab&quot;].active&#x27;) ??
+      list.querySelector(&#x27;[role=&quot;tab&quot;]&#x27;);
+    if (selected != null) {
+      selectTab(selected);
+    }
+  }
+  document.addEventListener(&quot;click&quot;, interact);
+  document.addEventListener(&quot;keydown&quot;, interact);
+  window.addEventListener(&quot;pagehide&quot;, () =&gt; {
+    document.removeEventListener(&quot;click&quot;, interact);
+    document.removeEventListener(&quot;keydown&quot;, interact);
+  }, { once: true });
+})();
+&lt;/script&gt;
+&lt;script id=&quot;codex-visualization-carousel&quot;&gt;
+  (() =&gt; {
+    for (const root of document.querySelectorAll(&quot;.viz-carousel&quot;)) {
+      const panels = Array.from(
+        root.querySelectorAll(&quot;:scope &gt; [data-variant]&quot;),
+      );
+      if (panels.length === 0) {
+        continue;
+      }
+      root.setAttribute(&quot;role&quot;, &quot;group&quot;);
+      panels.forEach((panel, index) =&gt; {
+        panel.hidden = index !== 0;
+        panel.setAttribute(&quot;role&quot;, &quot;group&quot;);
+        if (!panel.hasAttribute(&quot;aria-label&quot;)) {
+          panel.setAttribute(&quot;aria-label&quot;, panel.dataset.variant);
+        }
+      });
+      root.dataset.activeVariant = panels[0].dataset.variant;
+      if (panels.length === 1) {
+        continue;
+      }
+
+      const controls = document.createElement(&quot;div&quot;);
+      controls.className = &quot;viz-carousel-controls&quot;;
+      // Portable copy of the settings dropdown&#x27;s legacy glyph; no 14px icon-package preset matches it.
+      // https://github.com/openai/openai/blob/master/codex/codex-apps/webview/src/icons/chevron.svg
+      controls.innerHTML = `
+      &lt;button type=&quot;button&quot; class=&quot;viz-carousel-previous cursor-interaction&quot;&gt;&lt;i data-lucide=&quot;chevron-left&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/button&gt;
+      &lt;details class=&quot;viz-carousel-picker&quot;&gt;
+        &lt;summary class=&quot;cursor-interaction&quot;&gt;
+          &lt;span class=&quot;viz-carousel-count tabular-nums&quot;&gt;&lt;/span&gt;
+          &lt;span class=&quot;viz-carousel-name&quot;&gt;&lt;/span&gt;
+          &lt;svg class=&quot;viz-carousel-caret&quot; width=&quot;14&quot; height=&quot;14&quot; viewBox=&quot;0 0 20 21&quot; fill=&quot;none&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;&gt;
+            &lt;path d=&quot;M15.2793 7.71101C15.539 7.45131 15.961 7.45131 16.2207 7.71101C16.4804 7.97071 16.4804 8.39272 16.2207 8.65242L10.4707 14.4024C10.211 14.6621 9.78902 14.6621 9.52932 14.4024L3.77932 8.65242L3.69436 8.54792C3.52385 8.28979 3.55205 7.93828 3.77932 7.71101C4.00659 7.48374 4.3581 7.45554 4.61623 7.62605L4.72073 7.71101L10 12.9903L15.2793 7.71101Z&quot; fill=&quot;currentColor&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;0.6&quot; /&gt;
+          &lt;/svg&gt;
+        &lt;/summary&gt;
+        &lt;div class=&quot;viz-carousel-options&quot;&gt;&lt;/div&gt;
+      &lt;/details&gt;
+      &lt;button type=&quot;button&quot; class=&quot;viz-carousel-next cursor-interaction&quot;&gt;&lt;i data-lucide=&quot;chevron-right&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/button&gt;`;
+      const previous = controls.querySelector(&quot;.viz-carousel-previous&quot;);
+      const next = controls.querySelector(&quot;.viz-carousel-next&quot;);
+      const picker = controls.querySelector(&quot;.viz-carousel-picker&quot;);
+      const summary = picker.querySelector(&quot;summary&quot;);
+      const count = controls.querySelector(&quot;.viz-carousel-count&quot;);
+      const name = controls.querySelector(&quot;.viz-carousel-name&quot;);
+      const options = controls.querySelector(&quot;.viz-carousel-options&quot;);
+      const status = document.createElement(&quot;span&quot;);
+      status.className = &quot;sr-only&quot;;
+      status.setAttribute(&quot;role&quot;, &quot;status&quot;);
+      status.setAttribute(&quot;aria-live&quot;, &quot;polite&quot;);
+      status.setAttribute(&quot;aria-atomic&quot;, &quot;true&quot;);
+      previous.setAttribute(
+        &quot;aria-label&quot;,
+        root.dataset.previousLabel ?? &quot;Previous variant&quot;,
+      );
+      next.setAttribute(&quot;aria-label&quot;, root.dataset.nextLabel ?? &quot;Next variant&quot;);
+
+      let active = 0;
+      let mousePointerId = null;
+      let summaryPointerHandled = false;
+      summary.addEventListener(&quot;pointerdown&quot;, (event) =&gt; {
+        summaryPointerHandled =
+          event.pointerType === &quot;mouse&quot; &amp;&amp; event.button === 0 &amp;&amp; !event.ctrlKey;
+        if (!summaryPointerHandled) {
+          return;
+        }
+        event.preventDefault();
+        summary.focus({ preventScroll: true });
+        picker.open = !picker.open;
+        mousePointerId = picker.open ? event.pointerId : null;
+      });
+      summary.addEventListener(&quot;click&quot;, (event) =&gt; {
+        if (summaryPointerHandled &amp;&amp; event.detail &gt; 0) {
+          event.preventDefault();
+        }
+      });
+      const choices = panels.map((panel, index) =&gt; {
+        const choice = document.createElement(&quot;button&quot;);
+        choice.type = &quot;button&quot;;
+        choice.className = &quot;cursor-interaction&quot;;
+        choice.textContent = panel.dataset.variant;
+        choice.addEventListener(&quot;click&quot;, () =&gt; {
+          select(index);
+          summary.focus();
+        });
+        choice.addEventListener(&quot;pointerup&quot;, (event) =&gt; {
+          if (
+            picker.open &amp;&amp;
+            event.pointerType === &quot;mouse&quot; &amp;&amp;
+            event.button === 0 &amp;&amp;
+            event.pointerId === mousePointerId
+          ) {
+            choice.click();
+          }
+        });
+        options.appendChild(choice);
+        return choice;
+      });
+      const select = (index) =&gt; {
+        const changed = active !== index;
+        active = index;
+        panels.forEach((panel, position) =&gt; {
+          panel.hidden = position !== active;
+          choices[position].setAttribute(
+            &quot;aria-current&quot;,
+            String(position === active),
+          );
+        });
+        root.dataset.activeVariant = panels[active].dataset.variant;
+        count.textContent = `${active + 1} / ${panels.length}`;
+        name.textContent = panels[active].dataset.variant;
+        picker.open = false;
+        mousePointerId = null;
+        if (changed) {
+          status.textContent = `${count.textContent}: ${name.textContent}`;
+        }
+      };
+      previous.addEventListener(&quot;click&quot;, () =&gt;
+        select((active + panels.length - 1) % panels.length),
+      );
+      next.addEventListener(&quot;click&quot;, () =&gt;
+        select((active + 1) % panels.length),
+      );
+      picker.addEventListener(&quot;keydown&quot;, (event) =&gt; {
+        if (event.key === &quot;Escape&quot; &amp;&amp; picker.open) {
+          event.preventDefault();
+          picker.open = false;
+          mousePointerId = null;
+          summary.focus();
+          return;
+        }
+        if (event.altKey || event.ctrlKey || event.metaKey) {
+          return;
+        }
+        const index = choices.indexOf(document.activeElement);
+        let nextIndex;
+        if (event.key === &quot;ArrowDown&quot;) {
+          nextIndex = index &lt; 0 ? active : (index + 1) % choices.length;
+        } else if (event.key === &quot;ArrowUp&quot;) {
+          nextIndex = index &lt; 0 ? active : (index + choices.length - 1) % choices.length;
+        } else if (picker.open &amp;&amp; event.key === &quot;Home&quot;) {
+          nextIndex = 0;
+        } else if (picker.open &amp;&amp; event.key === &quot;End&quot;) {
+          nextIndex = choices.length - 1;
+        } else {
+          return;
+        }
+        event.preventDefault();
+        picker.open = true;
+        choices[nextIndex].focus();
+      });
+      picker.addEventListener(&quot;focusout&quot;, (event) =&gt; {
+        if (!picker.contains(event.relatedTarget)) {
+          picker.open = false;
+          mousePointerId = null;
+        }
+      });
+      const dismiss = (event) =&gt; {
+        if (!summary.contains(event.target)) {
+          mousePointerId = null;
+        }
+        if (!picker.contains(event.target)) {
+          picker.open = false;
+        }
+      };
+      const endPointerSelection = () =&gt; {
+        mousePointerId = null;
+      };
+      const sizePicker = () =&gt; {
+        root.style.setProperty(
+          &quot;--viz-carousel-picker-height&quot;,
+          `${picker.open ? options.offsetHeight : 0}px`,
+        );
+      };
+      picker.addEventListener(&quot;toggle&quot;, sizePicker);
+      window.addEventListener(&quot;resize&quot;, sizePicker);
+      document.addEventListener(&quot;pointerdown&quot;, dismiss);
+      document.addEventListener(&quot;pointerup&quot;, endPointerSelection);
+      document.addEventListener(&quot;pointercancel&quot;, endPointerSelection);
+      window.addEventListener(&quot;blur&quot;, endPointerSelection);
+      window.addEventListener(
+        &quot;pagehide&quot;,
+        () =&gt; {
+          document.removeEventListener(&quot;pointerdown&quot;, dismiss);
+          document.removeEventListener(&quot;pointerup&quot;, endPointerSelection);
+          document.removeEventListener(&quot;pointercancel&quot;, endPointerSelection);
+          window.removeEventListener(&quot;blur&quot;, endPointerSelection);
+          window.removeEventListener(&quot;resize&quot;, sizePicker);
+        },
+        { once: true },
+      );
+      root.append(controls, status);
+      select(0);
+    }
+  })();
+&lt;/script&gt;
+&lt;script id=&quot;codex-visualization-lucide&quot; async src=&quot;https://unpkg.com/lucide@1.17.0/dist/umd/lucide.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+(() =&gt; {
+  const initialize = () =&gt; {
+    globalThis.lucide?.createIcons({ attrs: { width: 16, height: 16 } });
+  };
+  if (globalThis.lucide != null) {
+    initialize();
+    return;
+  }
+  document
+    .getElementById(&quot;codex-visualization-lucide&quot;)
+    ?.addEventListener(&quot;load&quot;, initialize, { once: true });
+})();
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+"></iframe>
+<script>(() => {
+  const frame = document.getElementById("codex-visualization");
+  if (!(frame instanceof HTMLIFrameElement)) {
+    return;
+  }
+  let viewportHeight = globalThis.innerHeight;
+  const storageKey = `codex:visualization-widget-state-v2:${JSON.stringify([
+    globalThis.location.pathname,
+    globalThis.location.search,
+  ])}`;
+  const parseState = (serializedState) => {
+    if (
+      typeof serializedState !== "string" ||
+      new TextEncoder().encode(serializedState).length > 16 * 1024
+    ) {
+      throw new TypeError(
+        "Widget state must be a JSON object of at most 16 KiB",
+      );
+    }
+    /** @type {unknown} */
+    const state = JSON.parse(serializedState);
+    if (
+      state == null ||
+      typeof state !== "object" ||
+      Array.isArray(state) ||
+      ("imageIds" in state &&
+        (!Array.isArray(state.imageIds) || state.imageIds.length > 0))
+    ) {
+      throw new TypeError("Widget state must be a JSON object");
+    }
+    const storedState = { modelContent: null, privateContent: null, ...state };
+    const canonicalState = JSON.stringify(
+      storedState,
+      (_key, /** @type {unknown} */ value) => {
+        if (typeof value === "number" && !Number.isFinite(value)) {
+          throw new TypeError("Widget state must contain finite numbers");
+        }
+        return value;
+      },
+    );
+    if (new TextEncoder().encode(canonicalState).length > 16 * 1024) {
+      throw new TypeError(
+        "Widget state must be a JSON object of at most 16 KiB",
+      );
+    }
+    return storedState;
+  };
+  let storage = null;
+  let state = null;
+  try {
+    const localStorage = globalThis.localStorage;
+    const probeKey = `${storageKey}:probe`;
+    localStorage.setItem(probeKey, "1");
+    localStorage.removeItem(probeKey);
+    storage = localStorage;
+    const savedState = storage.getItem(storageKey);
+    if (savedState != null) {
+      try {
+        state = parseState(savedState);
+      } catch {
+        // Invalid saved state does not disable future writes.
+      }
+    }
+  } catch {
+    storage = null;
+  }
+  const initialGlobals = {
+    widgetState: state,
+    statePersistence: storage == null ? "none" : "local",
+  };
+
+  const channel = new MessageChannel();
+  channel.port1.addEventListener("message", (event) => {
+    const data = event.data;
+    if (typeof data !== "object" || data == null) {
+      return;
+    }
+    if (data.type === "widget-state-write") {
+      if (!Number.isSafeInteger(data.id) || data.id <= 0) {
+        return;
+      }
+      let ok = false;
+      try {
+        if (storage != null) {
+          const state = parseState(data.state);
+          storage.setItem(storageKey, JSON.stringify(state));
+          ok = true;
+        }
+      } catch {
+        // Storage denial, quota limits, and invalid state return a failed receipt.
+      }
+      channel.port1.postMessage({
+        type: "widget-state-result",
+        id: data.id,
+        ok,
+      });
+      return;
+    }
+    if (data.type === "height") {
+      const height = data.height;
+      if (
+        typeof height === "number" &&
+        Number.isFinite(height) &&
+        height >= 0 &&
+        height <= 10_000
+      ) {
+        frame.style.height = Math.ceil(height) + "px";
+      }
+      return;
+    }
+    if (data.type === "scroll-to") {
+      const top = data.top;
+      if (
+        typeof top === "number" &&
+        Number.isFinite(top) &&
+        top >= 0 &&
+        globalThis.navigator.userActivation?.isActive === true
+      ) {
+        globalThis.scrollTo({
+          top: Math.ceil(
+            globalThis.scrollY + frame.getBoundingClientRect().top + top,
+          ),
+        });
+      }
+      return;
+    }
+    if (data.type === "open-external") {
+      const rawHref = data.href;
+      if (typeof rawHref !== "string") {
+        return;
+      }
+      let href;
+      try {
+        const url = new URL(rawHref, document.baseURI);
+        if (url.protocol !== "https:") {
+          return;
+        }
+        href = url.href;
+      } catch {
+        return;
+      }
+      if (globalThis.navigator.userActivation?.isActive === true) {
+        const anchor = document.createElement("a");
+        anchor.href = href;
+        anchor.rel = "noopener noreferrer";
+        anchor.target = "_blank";
+        document.body.appendChild(anchor);
+        anchor.click();
+        anchor.remove();
+      }
+      return;
+    }
+    if (data.type === "follow-up") {
+      const prompt = data.prompt;
+      if (
+        typeof prompt !== "string" ||
+        globalThis.navigator.userActivation?.isActive !== true
+      ) {
+        return;
+      }
+      const title = data.title;
+      globalThis.prompt(typeof title === "string" ? title : prompt, prompt);
+    }
+  });
+  channel.port1.start();
+  const srcdoc = frame.dataset.srcdoc;
+  if (srcdoc == null) {
+    return;
+  }
+  globalThis.addEventListener("resize", () => {
+    const height = Number.parseFloat(frame.style.height);
+    if (!Number.isFinite(height) || height <= viewportHeight) {
+      frame.style.removeProperty("height");
+    }
+    viewportHeight = globalThis.innerHeight;
+    channel.port1.postMessage({ type: "measure" });
+  });
+  frame.addEventListener(
+    "load",
+    () => {
+      frame.contentWindow?.postMessage(
+        { type: "codex-visualization-initialize" },
+        "*",
+        [channel.port2],
+      );
+    },
+    { once: true },
+  );
+  // Match the trusted bootstrap element, not the same text in an authored title.
+  frame.srcdoc = srcdoc.replace(
+    '<script type="application/json" id="codex-visualization-widget-state">__CODEX_VISUALIZATION_WIDGET_STATE__<\/script>',
+    () =>
+      '<script type="application/json" id="codex-visualization-widget-state">' +
+      JSON.stringify(initialGlobals).replaceAll("<", "\\u003c") +
+      "<\/script>",
+  );
+  delete frame.dataset.srcdoc;
+})();
+</script>
+</body>
+</html>
